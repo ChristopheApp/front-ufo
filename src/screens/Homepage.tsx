@@ -46,9 +46,9 @@ function Homepage() {
         if(events.length > 0){
 
             console.log('y a des events')
-            const list = events.map((event: any, i) => {
+            const list = events.map((event: any, i: number) => {
                 console.log('test', i, event.name)
-                return  <PaperEvent>salut{event.name}</PaperEvent>
+                return  <PaperEvent>{event.name}, Début : {new Date(event.date_start).toLocaleDateString()} - Fin : {new Date(event.date_end).toDateString()}</PaperEvent>
             })
             setEventsList(list)
         }
