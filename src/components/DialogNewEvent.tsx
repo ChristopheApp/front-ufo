@@ -28,7 +28,7 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
         console.log(name)
         console.log(location)
         console.log(startDate, new Date(startDate))
-        console.log(endDate, new Date(endDate))
+        console.log( new Date(endDate))
         console.log(JSON.stringify(new Date(Date.now())))
         const date1 = new Date(startDate)
         const date2 = new Date(endDate)
@@ -37,10 +37,29 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
         }else{
             console.log("La date de début est inférieure à la date de fin")
             handleValid()
+            submitEvent()
+
         }
 
     }
 
+    const submitEvent = async () => { 
+        const data = {
+            name: name,
+            location: location,
+            start_date: new Date(startDate),
+            end_date: new Date(endDate)
+        }
+        const response = await fetch('http://localhost:3000/events', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        const result = await response.json()
+        console.log(result)
+    }
 
     return (
         <div>

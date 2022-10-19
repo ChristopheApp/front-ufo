@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 
 
 
-
 function Homepage() {
 
     // State to open or close the dialog create new event
@@ -42,17 +41,17 @@ function Homepage() {
          data();
      }, []);
 
-     useEffect(() => {
-        if(events.length > 0){
+    //  useEffect(() => {
+    //     if(events.length > 0){
 
-            console.log('y a des events')
-            const list = events.map((event: any, i: number) => {
-                console.log('test', i, event.name)
-                return  <PaperEvent>{event.name}, Début : {new Date(event.date_start).toLocaleDateString()} - Fin : {new Date(event.date_end).toDateString()}</PaperEvent>
-            })
-            setEventsList(list)
-        }
-     }, [events])
+    //         console.log('y a des events')
+    //         const list = events.map((event: any, i: number) => {
+    //             console.log('test', i, event.name)
+    //             return  <PaperEvent event={event} />
+    //         })
+    //         setEventsList(list)
+    //     }
+    //  }, [events])
 
     const handleClickOpenDNW = () => {
         setOpenDNW(true);
@@ -65,6 +64,19 @@ function Homepage() {
     const handleValidDNW = () => {
         setOpenDNW(false);
     };
+
+    const handleDeleteEvent = async (id: number) => {
+        console.log('delete event', id)
+        const response = await fetch(`http://localhost:3000/events/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const result = await response.json()
+        console.log(result)
+    }
+
 
     return (
         <>
@@ -86,15 +98,8 @@ function Homepage() {
                             flexDirection: 'column',
                         }}
                     >
-                        <Paper elevation={3} sx={{width: '100vh', marginBottom: "20px"}}>
-                            Un event
-                            </Paper>
                         
-                        <PaperEvent>
-                            Un Event styled 
-
-                        </PaperEvent>
-                        {eventsList}
+                        {events.length > 0 ? events.map((event: any, i: number) => {return <PaperEvent key={i} event={event} deleteEvent={handleDeleteEvent} />}) : null}
                     </Box>
 
                 </header>
