@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
+import {event} from '../types/event';
+
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -13,53 +15,63 @@ interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
-    handleValid: () => void;
+    handleValid: (event: event) => void;
 }
 
 export default function DialogNewEvent({ open, handleClose, handleValid }: Props) {
 
-    const [name, setName] = React.useState('');
-    const [location, setLocation] = React.useState('');
-    const [startDate, setStartDate] = React.useState('');
-    const [endDate, setEndDate] = React.useState('');
+    // const [name, setName] = useState('');
+    // const [location, setLocation] = useState('');
+    // const [startDate, setStartDate] = useState('');
+    // const [endDate, setEndDate] = useState('');
 
+    const [event, setEvent] = useState<event>({
+        name: '',
+        location: '',
+        date_start: '',
+        date_end: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEvent(prev=>({...prev, [e.target.name]: e.target.value}))
+    }
 
     const validForm = () => {
-        console.log(name)
-        console.log(location)
-        console.log(startDate, new Date(startDate))
-        console.log( new Date(endDate))
+        console.log(event.name)
+        console.log(event.location)
+        console.log(typeof(event.date_start), new Date(event.date_start))
+        console.log( new Date(event.date_end))
         console.log(JSON.stringify(new Date(Date.now())))
-        const date1 = new Date(startDate)
-        const date2 = new Date(endDate)
+        const date1 = new Date(event.date_start)
+        const date2 = new Date(event.date_end)
         if(date1 > date2){
             console.log("La date de début doit être inférieure à la date de fin")
         }else{
             console.log("La date de début est inférieure à la date de fin")
-            handleValid()
-            submitEvent()
+            handleValid(event)
+            console.log(event)
 
         }
 
     }
 
-    const submitEvent = async () => { 
-        const data = {
-            name: name,
-            location: location,
-            start_date: new Date(startDate),
-            end_date: new Date(endDate)
-        }
-        const response = await fetch('http://localhost:3000/events', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        const result = await response.json()
-        console.log(result)
-    }
+    // const submitEvent = async () => { 
+    //     const data = {
+    //         name: name,
+    //         location: location,
+    //         start_date: new Date(startDate),
+    //         end_date: new Date(endDate)
+    //     }
+    //     const response = await fetch('http://localhost:3000/events', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     })
+    //     const result = await response.json()
+    //     console.log(result)
+    // }
 
     return (
         <div>
@@ -78,10 +90,9 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                         type="title"
                         fullWidth
                         variant="standard"
-                        value={name}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setName(event.target.value);
-                        }}
+                        value={event.name}
+                        name="name"
+                        onChange={handleChange}
                     />
                     <TextField
                         autoFocus
@@ -91,10 +102,9 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                         type=""
                         fullWidth
                         variant="standard"
-                        value={location}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setLocation(event.target.value);
-                        }}
+                        value={event.location}
+                        name="location"
+                        onChange={handleChange}
                     />
                     <TextField
                         autoFocus
@@ -107,10 +117,9 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                         InputLabelProps={{
                             shrink: true,
                           }}
-                        value={startDate}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setStartDate(event.target.value);
-                        }}
+                        value={event.date_start}
+                        name="date_start"
+                        onChange={handleChange}
                     />
                     <TextField
                         autoFocus
@@ -123,10 +132,9 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                         InputLabelProps={{
                             shrink: true,
                           }}
-                        value={endDate}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setEndDate(event.target.value);
-                        }}
+                        value={event.date_end}
+                        name="date_end"
+                        onChange={handleChange}
                     />
                     
                 </DialogContent>

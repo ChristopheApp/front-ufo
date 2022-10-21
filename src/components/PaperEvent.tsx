@@ -4,11 +4,12 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import styled from '@emotion/styled'
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import {event} from '../types/event';
 
 interface Props {
     children?: React.ReactNode;
-    event: any;
-    deleteEvent: any;
+    event: event;
+    deleteEvent: (id: number | undefined) => void;
 }
 
 export default function PaperEvent({ children, event, deleteEvent }: Props) {
