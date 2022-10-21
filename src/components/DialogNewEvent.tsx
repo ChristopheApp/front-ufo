@@ -20,11 +20,7 @@ interface Props {
 
 export default function DialogNewEvent({ open, handleClose, handleValid }: Props) {
 
-    // const [name, setName] = useState('');
-    // const [location, setLocation] = useState('');
-    // const [startDate, setStartDate] = useState('');
-    // const [endDate, setEndDate] = useState('');
-
+    // State to store the new event
     const [event, setEvent] = useState<event>({
         name: '',
         location: '',
@@ -32,10 +28,15 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
         date_end: ''
     });
 
+    // Function to handle the change of the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEvent(prev=>({...prev, [e.target.name]: e.target.value}))
     }
 
+    /**
+     * Function to handle the click on the button to create a new event
+     * @returns {void}
+     */
     const validForm = () => {
         console.log(event.name)
         console.log(event.location)
@@ -55,23 +56,6 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
 
     }
 
-    // const submitEvent = async () => { 
-    //     const data = {
-    //         name: name,
-    //         location: location,
-    //         start_date: new Date(startDate),
-    //         end_date: new Date(endDate)
-    //     }
-    //     const response = await fetch('http://localhost:3000/events', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     })
-    //     const result = await response.json()
-    //     console.log(result)
-    // }
 
     return (
         <div>

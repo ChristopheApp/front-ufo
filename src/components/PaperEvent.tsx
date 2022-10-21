@@ -9,7 +9,7 @@ import {event} from '../types/event';
 interface Props {
     children?: React.ReactNode;
     event: event;
-    deleteEvent: (id: number | undefined) => void;
+    deleteEvent: (id: number | undefined, name: string) => void;
 }
 
 export default function PaperEvent({ children, event, deleteEvent }: Props) {
@@ -23,7 +23,7 @@ export default function PaperEvent({ children, event, deleteEvent }: Props) {
         <>
         <PaperStyled elevation={4}>
             {event ? event.name + " à " + event.location + ", Début : " + new Date(event.date_start).toLocaleDateString() + " - Fin : " + new Date(event.date_end).toDateString() : children}
-            <DeleteForeverRoundedIcon onClick={()=>{deleteEvent(event._id)}} />
+            <DeleteForeverRoundedIcon onClick={()=>{deleteEvent(event._id, event.name)}} />
         </PaperStyled>
         </>
     )
