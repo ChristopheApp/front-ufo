@@ -8,6 +8,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
+
 import { convertToObject } from 'typescript';
 
 
@@ -19,6 +22,8 @@ interface Props {
 }
 
 export default function DialogNewEvent({ open, handleClose, handleValid }: Props) {
+
+    const [bool] = useState(true);
 
     // State to store the new event
     const [event, setEvent] = useState<event>({
@@ -56,7 +61,10 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
 
     }
 
-
+    const isValid = () => {
+        return event.name !== '' && event.location !== '' && event.date_start !== '' && event.date_end !== '';
+    }
+console.log(isValid())
     return (
         <div>
 
@@ -123,8 +131,35 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                     
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Annuler</Button>
-                    <Button onClick={validForm}>Créer</Button>
+                    <Button 
+                        variant="contained" 
+                        color="error" 
+                        startIcon={<CloseRoundedIcon />}
+                        onClick={handleClose} 
+                    >
+                        Annuler
+                    </Button>
+
+                    { isValid() 
+                        ? <Button 
+                            variant="contained" 
+                            color="success" 
+                            endIcon={<EventAvailableRoundedIcon />} 
+                            onClick={validForm}
+                        >
+                            Créer
+                        </Button>
+                        : <Button 
+                            variant="contained" 
+                            color="success" 
+                            endIcon={<EventAvailableRoundedIcon />} 
+                            onClick={validForm}
+                            disabled
+                        >
+                            Créer
+                        </Button>
+                    }
+
                 </DialogActions>
             </Dialog>
         </div>

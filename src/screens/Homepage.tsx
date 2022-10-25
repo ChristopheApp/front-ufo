@@ -1,4 +1,3 @@
-import logo from '../logo.svg';
 import React, { useState, useEffect } from 'react';
 import { event } from '../types/event';
 
@@ -9,9 +8,12 @@ import SnackAlert from '../components/SnackAlert';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
+interface Props {
+    isAdmin: boolean;
+}
 
 
-function Homepage() {
+function Homepage({isAdmin}: Props) {
 
     // State to store the events fetched from the API
     const [events, setEvents] = useState<event[]>([]);
@@ -83,9 +85,12 @@ function Homepage() {
 
             const result = await response.json()
             console.log(result)
+            handleOpenSnack(`L'évènement "${data.name}" a bien été créé.`, 'success');
+
         }
         catch (err) {
             console.error("Error while creating a new event", err);
+            handleOpenSnack(`L'évènement "${data.name}" n'a pas pu être créé.`, 'error');
         }
         fetchAllEvents();
     }
@@ -175,9 +180,9 @@ function Homepage() {
 
             <DialogNewEvent open={openDNE} handleClose={handleCloseDNE} handleValid={handleValidDNE} />
 
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
+            <div className="homepage">
+                <div className="homepage_header">
+                    <img src="ufolep.png" className="logo-ufolep" alt="Ufolep" />
                     <Button variant="contained" onClick={handleClickOpenDNE}>
                         Create new event
                     </Button>
@@ -188,17 +193,20 @@ function Homepage() {
                     <p>
                         Liste des évènements...
                     </p>
+                </div>
                     <Box
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
+                            alignItems: 'center',
+                            // width: '80%',
+                            // ml: '10%'
                         }}
                     >
 
-                        {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} event={event} deleteEvent={handleDeleteEvent} /> }) : null}
+                        {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} isAdmin={isAdmin} event={event} deleteEvent={handleDeleteEvent} /> }) : null}
                     </Box>
 
-                </header>
             </div>
         </>
     );
