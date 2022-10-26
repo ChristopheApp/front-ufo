@@ -10,7 +10,7 @@ import { event } from '../types/event';
 interface Props {
     children?: React.ReactNode;
     event: event;
-    deleteEvent: (id: number | undefined, name: string) => void;
+    deleteEvent: (id: number, name: string) => void;
     isAdmin: boolean;
 }
 
@@ -37,7 +37,7 @@ export default function PaperEvent({ children, event, deleteEvent, isAdmin }: Pr
 
                     {event ? event.name + " à " + event.location + ", Début : " + new Date(event.date_start).toLocaleDateString() + " - Fin : " + new Date(event.date_end).toDateString() : children}
                 </Box>
-                {isAdmin ? <DeleteForeverRoundedIcon onClick={() => { deleteEvent(event._id, event.name) }} /> : null}
+                {isAdmin ? <DeleteForeverRoundedIcon onClick={() => { deleteEvent(event._id as number, event.name) }} /> : null}
             </PaperStyled>
         </>
     )
