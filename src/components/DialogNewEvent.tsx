@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {event} from '../types/event';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -12,6 +13,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
 
 import { convertToObject } from 'typescript';
+import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 
 interface Props {
@@ -61,10 +63,20 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
 
     }
 
-    const isValid = () => {
-        return event.name !== '' && event.location !== '' && event.date_start !== '' && event.date_end !== '';
+    const disabledButtonCreate = () => {
+        if (event.name !== '' && event.location !== '' && event.date_start !== '' && event.date_end !== '')
+            return false
+        else
+            return true
     }
-console.log(isValid())
+
+    const colorButtonCreate = () => {
+        if (event.date_end >= event.date_start)
+            return "success"
+        else
+            return "warning"
+    }
+
     return (
         <div>
 
@@ -80,7 +92,7 @@ console.log(isValid())
                         id="name"
                         label="Nom"
                         type="title"
-                        fullWidth
+                        fullWidth={true}
                         variant="standard"
                         value={event.name}
                         name="name"
@@ -92,34 +104,43 @@ console.log(isValid())
                         id="lieu"
                         label="Lieu"
                         type=""
-                        fullWidth
+                        fullWidth={true}
                         variant="standard"
                         value={event.location}
                         name="location"
                         onChange={handleChange}
                     />
+                    <Box 
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+
                     <TextField
+                        
                         autoFocus
                         margin="dense"
                         id="startDate"
                         label="Date Début"
                         type="date"
-                        fullWidth
+                        fullWidth={false}
                         variant="standard"
                         InputLabelProps={{
                             shrink: true,
                           }}
-                        value={event.date_start}
-                        name="date_start"
-                        onChange={handleChange}
-                    />
+                          value={event.date_start}
+                          name="date_start"
+                          onChange={handleChange}
+                          />
                     <TextField
                         autoFocus
                         margin="dense"
                         id="endDate"
                         label="Date Fin"
                         type="date"
-                        fullWidth
+                        fullWidth={false}
                         variant="standard"
                         InputLabelProps={{
                             shrink: true,
@@ -127,7 +148,8 @@ console.log(isValid())
                         value={event.date_end}
                         name="date_end"
                         onChange={handleChange}
-                    />
+                        />
+                        </Box>
                     
                 </DialogContent>
                 <DialogActions>
@@ -140,25 +162,16 @@ console.log(isValid())
                         Annuler
                     </Button>
 
-                    { isValid() 
-                        ? <Button 
-                            variant="contained" 
-                            color="success" 
-                            endIcon={<EventAvailableRoundedIcon />} 
-                            onClick={validForm}
-                        >
-                            Créer
-                        </Button>
-                        : <Button 
-                            variant="contained" 
-                            color="success" 
-                            endIcon={<EventAvailableRoundedIcon />} 
-                            onClick={validForm}
-                            disabled
-                        >
-                            Créer
-                        </Button>
-                    }
+                    <Button 
+                        variant="contained" 
+                        color={colorButtonCreate()} 
+                        endIcon={<EventAvailableRoundedIcon />} 
+                        onClick={validForm}
+                        disabled={disabledButtonCreate()}
+                    >
+                        Créer
+                    </Button>
+                    
 
                 </DialogActions>
             </Dialog>

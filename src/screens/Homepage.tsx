@@ -4,6 +4,7 @@ import { event } from '../types/event';
 import DialogNewEvent from '../components/DialogNewEvent';
 import PaperEvent from '../components/PaperEvent';
 import SnackAlert from '../components/SnackAlert';
+import Buttons from '../components/Buttons';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -13,7 +14,7 @@ interface Props {
 }
 
 
-function Homepage({isAdmin}: Props) {
+function Homepage({ isAdmin }: Props) {
 
     // State to store the events fetched from the API
     const [events, setEvents] = useState<event[]>([]);
@@ -128,7 +129,7 @@ function Homepage({isAdmin}: Props) {
         catch (err) {
             console.error("Error while deleting an event", err);
             handleOpenSnack(`Une erreur s'est produite, l'évènement "${name}" n'a pas pu etre supprimé.`, 'error');
-            
+
         }
     }
 
@@ -166,7 +167,7 @@ function Homepage({isAdmin}: Props) {
         setErrorSnackMsg(msg);
         setAlertType(type)
         setOpenSnack(true);
-    
+
         console.log('open snack')
     }
 
@@ -181,32 +182,42 @@ function Homepage({isAdmin}: Props) {
             <DialogNewEvent open={openDNE} handleClose={handleCloseDNE} handleValid={handleValidDNE} />
 
             <div className="homepage">
-                <div className="homepage_header">
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        // width: '80%',
+                        // ml: '10%'
+                    }}
+                >
+                    <h1 className="title">UFOLEP</h1>
+                    <h2 className="test">TEST GRADIENT LINEAR</h2>
                     <img src="ufolep.png" className="logo-ufolep" alt="Ufolep" />
-                    <Button variant="contained" onClick={handleClickOpenDNE}>
-                        Create new event
-                    </Button>
-                    <Button variant="contained" onClick={() => {handleOpenSnack("This is a success message", 'success')}}>
-                        Open snackbar
-                    </Button>
-                    <button >Get all events</button>
-                    <p>
-                        Liste des évènements...
-                    </p>
-                </div>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            // width: '80%',
-                            // ml: '10%'
-                        }}
-                    >
-
-                        {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} isAdmin={isAdmin} event={event} deleteEvent={handleDeleteEvent} /> }) : null}
-                    </Box>
-
+                </Box>
+                <Buttons onClick={handleClickOpenDNE}>
+                    Create new event
+                </Buttons>
+                <Button variant="contained" onClick={() => { handleOpenSnack("This is a success message", 'success') }}>
+                    Open snackbar
+                </Button>
+                <button >Get all events</button>
+                <h2>
+                    Liste des évènements en création
+                </h2>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        // width: '80%',
+                        ml: '20px'
+                    }}
+                >
+                    {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} isAdmin={isAdmin} event={event} deleteEvent={handleDeleteEvent} /> }) : null}
+                </Box>
+                <h2>
+                    Liste des évènements passés
+                </h2>
             </div>
         </>
     );
