@@ -139,7 +139,7 @@ function Homepage({ isAdmin }: Props) {
      * @returns {void}
      * 
     */
-    const handleDeleteEvent = (id: number | undefined, name: string) => {
+    const handleDeleteEvent = (id: number, name: string) => {
         deleteEvent(id, name)
     }
 
