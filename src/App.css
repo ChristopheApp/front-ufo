@@ -4,16 +4,6 @@
 }
 
 
-
-.homepage {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  color: #70787A;
-
-}
-
-
  .event {
   min-height: 100vh;
 

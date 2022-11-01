@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { event } from '../types/event';
 
+import HomepageStyled from '../components/styled/HomepageStyled';
 import DialogNewEvent from '../components/DialogNewEvent';
 import PaperEvent from '../components/PaperEvent';
 import SnackAlert from '../components/SnackAlert';
 import Buttons from '../components/Buttons';
+import BoxEvents from '../components/BoxEvents';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -181,7 +183,7 @@ function Homepage({ isAdmin }: Props) {
 
             <DialogNewEvent open={openDNE} handleClose={handleCloseDNE} handleValid={handleValidDNE} />
 
-            <div className="homepage">
+            <HomepageStyled>
                 <Box
                     sx={{
                         display: 'flex',
@@ -191,34 +193,49 @@ function Homepage({ isAdmin }: Props) {
                         // ml: '10%'
                     }}
                 >
-                    <h1 className="title">UFOLEP</h1>
-                    <h2 className="test">TEST GRADIENT LINEAR</h2>
+                    {/* <h1 className="title">UFOLEP</h1>
+                        <h2 className="test">TEST GRADIENT LINEAR</h2> */}
                     <img src="ufolep.png" className="logo-ufolep" alt="Ufolep" />
                 </Box>
                 <Buttons onClick={handleClickOpenDNE}>
                     Create new event
                 </Buttons>
-                <Button variant="contained" onClick={() => { handleOpenSnack("This is a success message", 'success') }}>
-                    Open snackbar
-                </Button>
-                <button >Get all events</button>
-                <h2>
-                    Liste des évènements en création
-                </h2>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        // width: '80%',
-                        ml: '20px'
+                {/* <Button variant="contained" onClick={() => { handleOpenSnack("This is a success message", 'success') }}>
+                        Open snackbar
+                    </Button>
+                    <button >Get all events</button> */}
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    // width: '80%',
+                    // ml: '10'
                     }}
                 >
-                    {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} isAdmin={isAdmin} event={event} deleteEvent={handleDeleteEvent} /> }) : null}
-                </Box>
-                <h2>
-                    Liste des évènements passés
-                </h2>
-            </div>
+                    <BoxEvents
+                        title="Evènements passés"
+                        events={events}
+                        isAdmin={isAdmin}
+                        handleDeleteEvent={handleDeleteEvent}
+                    />
+
+                    <BoxEvents
+                        title="Infos"
+                        events={events}
+                        isAdmin={isAdmin}
+                        handleDeleteEvent={handleDeleteEvent}
+                    />
+
+                    <BoxEvents
+                        title="Evènements en création"
+                        events={events}
+                        isAdmin={isAdmin}
+                        handleDeleteEvent={handleDeleteEvent}
+                    />
+
+                </Box >
+
+            </HomepageStyled>
         </>
     );
 }

@@ -22,17 +22,14 @@ export default function Buttons({ children, onClick }: Props) {
     `
 
     const Button2 = styled(Button)`
-    position: absolute;
     width: 200px;
     height: 70px;
-    right: 50px;
-    top: 200px;
-    :&hover{
-        background: #000000;
+    &:hover{
+        background-color: #1D9BF0;
     };
         
 
-        background: #159CBA;
+        background: #1D9BF0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 1);
         border-radius: 15px;
         color: white;
