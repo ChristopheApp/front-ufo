@@ -10,6 +10,7 @@ import BoxEvents from '../components/BoxEvents';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 interface Props {
     isAdmin: boolean;
@@ -197,43 +198,57 @@ function Homepage({ isAdmin }: Props) {
                         <h2 className="test">TEST GRADIENT LINEAR</h2> */}
                     <img src="ufolep.png" className="logo-ufolep" alt="Ufolep" />
                 </Box>
-                <Buttons onClick={handleClickOpenDNE}>
-                    Create new event
-                </Buttons>
+                <Grid container direction="row" justifyContent="flex-end" sx={{ mt: 2 }}>
+                    <Grid item sx={{mr: 2}}>
+                        <Buttons onClick={handleClickOpenDNE}>
+                            Create new event
+                        </Buttons>
+                    </Grid>
+                </Grid>
                 {/* <Button variant="contained" onClick={() => { handleOpenSnack("This is a success message", 'success') }}>
                         Open snackbar
                     </Button>
                     <button >Get all events</button> */}
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    // width: '80%',
-                    // ml: '10'
-                    }}
-                >
-                    <BoxEvents
-                        title="Evènements passés"
-                        events={events}
-                        isAdmin={isAdmin}
-                        handleDeleteEvent={handleDeleteEvent}
-                    />
+                <Grid container columns={24} direction="row" justifyContent="space-between" spacing={2} sx={{ mt: 2 }}>
+                    <Grid item xs={24} sm={12} md={8} lg={7} xl={5} >
 
-                    <BoxEvents
-                        title="Infos"
-                        events={events}
-                        isAdmin={isAdmin}
-                        handleDeleteEvent={handleDeleteEvent}
-                    />
+                        <BoxEvents
+                            title="Evènements passés"
+                            events={events}
+                            isAdmin={isAdmin}
+                            handleDeleteEvent={handleDeleteEvent}
+                        />
 
-                    <BoxEvents
-                        title="Evènements en création"
-                        events={events}
-                        isAdmin={isAdmin}
-                        handleDeleteEvent={handleDeleteEvent}
-                    />
+                        
+                    </Grid>
 
-                </Box >
+                    <Grid item xs={0} sm={12} md={8} lg={10} xl={14} sx={{background: '#273340'}} />
+
+                       
+
+                        
+                    {/* <Grid item style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+
+
+                        <BoxEvents
+                            title="Infos"
+                            events={events}
+                            isAdmin={isAdmin}
+                            handleDeleteEvent={handleDeleteEvent}
+                        />
+
+                    </Grid> */}
+                    <Grid item xs={24} sm={12} md={8} lg={7} xl={5} >
+
+                        <BoxEvents
+                            title="Evènements en création"
+                            events={events}
+                            isAdmin={isAdmin}
+                            handleDeleteEvent={handleDeleteEvent}
+                        />
+                    </Grid>
+
+                </Grid>
 
             </HomepageStyled>
         </>

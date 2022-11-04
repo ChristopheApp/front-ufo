@@ -1,6 +1,10 @@
 import { Box } from "@mui/material";
 import { ReactElement } from "react";
 
+import BoxEvent from './BoxEvent'
+
+import styled from "@emotion/styled";
+
 import type { event } from "../types/event";
 
 import PaperEvent from './PaperEvent'
@@ -16,11 +20,18 @@ interface Props {
 
 export default function BoxEvents({ children, title, events,  isAdmin, handleDeleteEvent}: Props) {
 
+    const H2 = styled.h2`
+
+    `;
     return (
         <Box sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+
+            color: 'white',
+            background: '#1E2732',
+            borderRadius: '15px',
+            marginX: '20px',
             // width: '80%',
             // ml: '10%'
         }}
@@ -36,7 +47,10 @@ export default function BoxEvents({ children, title, events,  isAdmin, handleDel
                     //ml: '20px'
                 }}
             >
-                {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} isAdmin={isAdmin} event={event} deleteEvent={handleDeleteEvent} /> }) : null}
+                {/* <BoxEvent event={events[0]} isAdmin={isAdmin} handleDeleteEvent={handleDeleteEvent} /> */}
+                {/* {events.length > 0 ?  <BoxEvent  event={events[0]} isAdmin={isAdmin} handleDeleteEvent={handleDeleteEvent} /> : null} */}
+                {events.length > 0 ? events.map((event: any, i: number) => { return <BoxEvent key={i} event={event} isAdmin={isAdmin} handleDeleteEvent={handleDeleteEvent} /> }) : null}
+                {/* {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} isAdmin={isAdmin} event={event} deleteEvent={handleDeleteEvent} /> }) : null} */}
             </Box>
         </Box>
     )
