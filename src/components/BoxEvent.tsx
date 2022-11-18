@@ -41,8 +41,8 @@ export default function BoxEvent({ children, event,  isAdmin, handleDeleteEvent}
     `
 
     return (
-        <BoxStyled>
-            <ButtonEdit />
+        <BoxStyled onClick={()=> {console.log("click event")}}>
+            {event.state === "En création" ? <ButtonEdit /> : <ButtonMore />}
             <p>
                 {event.name}
             </p>

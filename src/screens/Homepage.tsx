@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { event } from '../types/event';
 
 import HomepageStyled from '../components/styled/HomepageStyled';
@@ -19,8 +19,12 @@ interface Props {
 
 function Homepage({ isAdmin }: Props) {
 
+    const eventSelected = useRef<event | null>(null);
+
     // State to store the events fetched from the API
     const [events, setEvents] = useState<event[]>([]);
+    const [eventsCreated, setEventsCreated] = useState<event[]>([]);
+    const [eventsInProgress, setEventsInProgress] = useState<event[]>([]);
 
     // State to open or close the dialog to create new event
     const [openDNE, setOpenDNE] = useState(false);
@@ -42,6 +46,9 @@ function Homepage({ isAdmin }: Props) {
      * @returns {void}
      */
     const fetchAllEvents = async () => {
+        setEvents([]);
+        setEventsCreated([]);
+        setEventsInProgress([]);
         try {
             const response = await fetch(`http://localhost:3000/events/`);
             console.log(response)
@@ -53,6 +60,15 @@ function Homepage({ isAdmin }: Props) {
             const result = await response.json();
             console.log(result);
             setEvents(result)
+            eventSelected.current = result[0];
+
+            result.forEach((event: event) => {
+                if(event.state === "En création"){
+                    setEventsInProgress((eventsInProgress) => [...eventsInProgress, event]);
+                } else {
+                    setEventsCreated(eventsCreated => [...eventsCreated, event])
+                } 
+            });
         }
         catch (err) {
             console.error("Error while fetching all events", err);
@@ -69,7 +85,8 @@ function Homepage({ isAdmin }: Props) {
             name: event.name,
             location: event.location,
             start_date: new Date(event.date_start),
-            end_date: new Date(event.date_end)
+            end_date: new Date(event.date_end),
+            state: "En création"
         }
 
         try {
@@ -209,12 +226,12 @@ function Homepage({ isAdmin }: Props) {
                         Open snackbar
                     </Button>
                     <button >Get all events</button> */}
-                <Grid container columns={24} direction="row" justifyContent="space-between" spacing={2} sx={{ mt: 2 }}>
+                <Grid container columns={24} direction="row" justifyContent="space-between"  sx={{ mt: 2 }}>
                     <Grid item xs={24} sm={12} md={8} lg={7} xl={5} >
 
                         <BoxEvents
                             title="Evènements passés"
-                            events={events}
+                            events={eventsCreated}
                             isAdmin={isAdmin}
                             handleDeleteEvent={handleDeleteEvent}
                         />
@@ -242,7 +259,7 @@ function Homepage({ isAdmin }: Props) {
 
                         <BoxEvents
                             title="Evènements en création"
-                            events={events}
+                            events={eventsInProgress}
                             isAdmin={isAdmin}
                             handleDeleteEvent={handleDeleteEvent}
                         />
