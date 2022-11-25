@@ -7,6 +7,7 @@ import PaperEvent from '../components/PaperEvent';
 import SnackAlert from '../components/SnackAlert';
 import Buttons from '../components/Buttons';
 import BoxEvents from '../components/BoxEvents';
+import BoxEventCentral from '../components/BoxEventCentral';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -25,6 +26,7 @@ function Homepage({ isAdmin }: Props) {
     const [events, setEvents] = useState<event[]>([]);
     const [eventsCreated, setEventsCreated] = useState<event[]>([]);
     const [eventsInProgress, setEventsInProgress] = useState<event[]>([]);
+    const [eventCentral, setEventCentral] = useState<event | null>(null);
 
     // State to open or close the dialog to create new event
     const [openDNE, setOpenDNE] = useState(false);
@@ -60,7 +62,6 @@ function Homepage({ isAdmin }: Props) {
             const result = await response.json();
             console.log(result);
             setEvents(result)
-            eventSelected.current = result[0];
 
             result.forEach((event: event) => {
                 if(event.state === "En création"){
@@ -159,6 +160,15 @@ function Homepage({ isAdmin }: Props) {
      * @returns {void}
      * 
     */
+
+    const handleClickEvent = (event: event) => {
+        console.log('click event')
+        console.log(event)
+        setEventCentral(event);
+        eventSelected.current = event;
+        console.log(eventSelected.current)
+    }
+
     const handleDeleteEvent = (id: number, name: string) => {
         deleteEvent(id, name)
     }
@@ -233,13 +243,20 @@ function Homepage({ isAdmin }: Props) {
                             title="Evènements passés"
                             events={eventsCreated}
                             isAdmin={isAdmin}
-                            handleDeleteEvent={handleDeleteEvent}
+                            handleDeleteEvent={handleClickEvent}
                         />
 
                         
                     </Grid>
 
-                    <Grid item xs={0} sm={12} md={8} lg={10} xl={14} sx={{background: '#273340'}} />
+                    <Grid item xs={0} sm={12} md={8} lg={10} xl={14} sx={{background: '#273340'}}>
+                    {eventCentral ? 
+                        <BoxEventCentral
+                            event={eventCentral}
+                            isAdmin={isAdmin}
+                        />
+                        : <p>tg</p>}
+                    </Grid>
 
                        
 
@@ -261,7 +278,7 @@ function Homepage({ isAdmin }: Props) {
                             title="Evènements en création"
                             events={eventsInProgress}
                             isAdmin={isAdmin}
-                            handleDeleteEvent={handleDeleteEvent}
+                            handleDeleteEvent={handleClickEvent}
                         />
                     </Grid>
 

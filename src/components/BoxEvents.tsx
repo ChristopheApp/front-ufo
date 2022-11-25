@@ -14,7 +14,7 @@ interface Props {
     title: string
     events: event[]
     isAdmin: boolean
-    handleDeleteEvent: (id: number, name: string) => void;
+    handleDeleteEvent: (event: event) => void;
 
 }
 
@@ -49,7 +49,7 @@ export default function BoxEvents({ children, title, events,  isAdmin, handleDel
             >
                 {/* <BoxEvent event={events[0]} isAdmin={isAdmin} handleDeleteEvent={handleDeleteEvent} /> */}
                 {/* {events.length > 0 ?  <BoxEvent  event={events[0]} isAdmin={isAdmin} handleDeleteEvent={handleDeleteEvent} /> : null} */}
-                {events.length > 0 ? events.map((event: any, i: number) => { return <BoxEvent key={i} event={event} isAdmin={isAdmin} handleDeleteEvent={handleDeleteEvent} /> }) : null}
+                {events.length > 0 ? events.map((event: any, i: number) => { return <BoxEvent key={i} event={event} isAdmin={isAdmin} handleClickEvent={handleDeleteEvent} /> }) : null}
                 {/* {events.length > 0 ? events.map((event: any, i: number) => { return <PaperEvent key={i} isAdmin={isAdmin} event={event} deleteEvent={handleDeleteEvent} /> }) : null} */}
             </Box>
         </Box>

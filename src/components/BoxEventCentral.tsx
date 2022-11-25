@@ -15,11 +15,15 @@ interface Props {
     children?: ReactElement
     event: event
     isAdmin: boolean
-    handleClickEvent: (event: event) => void;
-
 }
 
-export default function BoxEvent({ children, event,  isAdmin, handleClickEvent}: Props) {
+export default function BoxEventCentral({ children, event,  isAdmin}: Props) {
+    
+    // const [event, setEvent] = useState<event>(events)
+
+    // useEffect(() => {
+    //     setEvent(events)
+    // }, [events])
 
     const BoxStyled = styled(Box)`
     displau: flex;
@@ -41,7 +45,7 @@ export default function BoxEvent({ children, event,  isAdmin, handleClickEvent}:
     `
 
     return (
-        <BoxStyled onClick={() => handleClickEvent(event)}>
+        <BoxStyled>
             {event.state === "En création" ? <ButtonEdit /> : <ButtonMore />}
             <p>
                 {event.name}
