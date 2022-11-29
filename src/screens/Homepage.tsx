@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { event } from '../types/event';
 
-import HomepageStyled from '../components/styled/HomepageStyled';
+import BackgroundStyled from '../components/styled/BackgroundStyled';
 import DialogNewEvent from '../components/DialogNewEvent';
 import PaperEvent from '../components/PaperEvent';
 import SnackAlert from '../components/SnackAlert';
@@ -211,7 +211,7 @@ function Homepage({ isAdmin }: Props) {
 
             <DialogNewEvent open={openDNE} handleClose={handleCloseDNE} handleValid={handleValidDNE} />
 
-            <HomepageStyled>
+            <BackgroundStyled>
                 <Box
                     sx={{
                         display: 'flex',
@@ -228,7 +228,7 @@ function Homepage({ isAdmin }: Props) {
                 <Grid container direction="row" justifyContent="flex-end" sx={{ mt: 2 }}>
                     <Grid item sx={{mr: 2}}>
                         <Buttons onClick={handleClickOpenDNE}>
-                            Create new event
+                            Nouvel event
                         </Buttons>
                     </Grid>
                 </Grid>
@@ -249,7 +249,7 @@ function Homepage({ isAdmin }: Props) {
                         
                     </Grid>
 
-                    <Grid item xs={0} sm={12} md={8} lg={10} xl={14} sx={{background: '#273340'}}>
+                    <Grid item xs={0} sm={12} md={8} lg={10} xl={14} >
                     {eventCentral ? 
                         <BoxEventCentral
                             event={eventCentral}
@@ -284,7 +284,7 @@ function Homepage({ isAdmin }: Props) {
 
                 </Grid>
 
-            </HomepageStyled>
+            </BackgroundStyled>
         </>
     );
 }

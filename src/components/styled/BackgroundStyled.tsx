@@ -2,12 +2,12 @@ import styled from "@emotion/styled"
 import { ReactElement } from "react"
 
 interface Props {
-    children: ReactElement[]
+    children: ReactElement[] | ReactElement
 }
 
-export default function HomepageStyled({children} : Props) {
+export default function BackgroundStyled({children} : Props) {
 
-    const Homepage = styled.div`
+    const Background = styled.div`
         min-height: 100vh;
 
         background-color: #15202B;
@@ -16,9 +16,9 @@ export default function HomepageStyled({children} : Props) {
     `
 
     return (
-        <Homepage>
+        <Background>
             {children}
-        </Homepage>
+        </Background>
         
     )
 }

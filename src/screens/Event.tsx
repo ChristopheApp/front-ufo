@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
+import BackgroundStyled from '../components/styled/BackgroundStyled';
 import Loading from '../components/Loading';
 
 import type { event } from '../types/event';
@@ -37,16 +38,18 @@ export default function Event() {
 
     return (
         <>
-            <div className='event'>
-                {!event
-                    ? <Loading />
-                    : <div>
-                        <h1>{event.name}</h1>
-                        <p>{event._id}</p>
-                    </div>
-                }
+            <BackgroundStyled>
+                <div className='event'>
+                    {!event
+                        ? <Loading />
+                        : <div>
+                            <h1>{event.name}</h1>
+                            <p>{event._id}</p>
+                        </div>
+                    }
 
-            </div>
+                </div>
+            </BackgroundStyled>
         </>
     )
 };

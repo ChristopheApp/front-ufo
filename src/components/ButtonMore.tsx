@@ -1,15 +1,15 @@
 import styled from '@emotion/styled'
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 interface Props {
     children?: React.ReactNode;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
-export default function ButtonMore() {
+export default function ButtonMore({ children, onClick }: Props) {
 
-    const ButtonStyled = styled(Button)`
+    const ButtonStyled = styled(IconButton)`
     float: right;
     width: 64px;
     height: 64px;
@@ -24,7 +24,7 @@ export default function ButtonMore() {
     `
 
     return (
-        <ButtonStyled>
+        <ButtonStyled onClick={onClick}>
             <MoreHorizTwoToneIcon />
         </ButtonStyled>
     )

@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, ReactElement} from 'react'
+import { useNavigate } from "react-router-dom";
+
 import { Box } from "@mui/material";
-import { ReactElement } from "react";
 
 import formatDate from "../utils/formatDate";
 
@@ -20,6 +21,8 @@ interface Props {
 }
 
 export default function BoxEvent({ children, event,  isAdmin, handleClickEvent}: Props) {
+
+    const navigate = useNavigate();
 
     const BoxStyled = styled(Box)`
     displau: flex;
@@ -42,7 +45,7 @@ export default function BoxEvent({ children, event,  isAdmin, handleClickEvent}:
 
     return (
         <BoxStyled onClick={() => handleClickEvent(event)}>
-            {event.state === "En création" ? <ButtonEdit /> : <ButtonMore />}
+            {event.state === "En création" ? <ButtonEdit onClick={()=> navigate(`event/${event._id}`)} scale={1} mr={10} /> : <ButtonMore onClick={()=> navigate(`event/${event._id}`)} />}
             <p>
                 {event.name}
             </p>

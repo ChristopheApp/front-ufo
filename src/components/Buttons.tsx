@@ -22,8 +22,9 @@ export default function Buttons({ children, onClick }: Props) {
     `
 
     const Button2 = styled(Button)`
-    width: 200px;
-    height: 70px;
+    // width: 200px;
+    // height: 70px;
+    font-weight: bold;
     &:hover{
         background-color: #1D9BF0;
     };
