@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import BoxCentralsStyled from "../components/styled/BoxCentralsStyled";
 import BackgroundStyled from '../components/styled/BackgroundStyled';
-import ButtonEdit from '../components/ButtonEdit';
+import ButtonEditStyled from '../components/styled/ButtonEditStyled';
 import Loading from '../components/Loading';
 
 import type { event } from '../types/event';
@@ -69,7 +69,7 @@ export default function Event() {
                             <BoxCentralsStyled>
                                 <h2>
                                     {event.name}
-                                    {editMode ? <ButtonEdit scale={0.7} /> : <div/>}
+                                    {editMode ? <ButtonEditStyled scale={0.7} /> : <div/>}
                                 </h2>
 
                                 <h3>{event.location}</h3>
@@ -85,7 +85,7 @@ export default function Event() {
                             <BoxCentralsStyled>
                                 <h3>
                                     Activités
-                                    {editMode ? <ButtonEdit scale={0.7} /> : <div/>}
+                                    {editMode ? <ButtonEditStyled scale={0.7} /> : <div/>}
                                 </h3>
                             </BoxCentralsStyled>
 
@@ -95,7 +95,7 @@ export default function Event() {
                             <BoxCentralsStyled>
                                 <h3>
                                     Equipes
-                                    {editMode ? <ButtonEdit scale={0.7} /> : <div/>}
+                                    {editMode ? <ButtonEditStyled scale={0.7} /> : <div/>}
                                 </h3>
                             </BoxCentralsStyled>
 
