@@ -10,12 +10,10 @@ interface Props {
 export default function BoxCentralsStyled({ children}: Props) {
 
     const BoxStyled = styled(Box)`
-    displau: flex;
-    flex-direction: column;
-    color: white;
-    padding-left: 10px;
-    border: solid #38444D;
-    border-width: 1px;
+        color: white;
+        padding-left: 10px;
+        border: solid #38444D;
+        border-width: 1px;
     `
 
     return(

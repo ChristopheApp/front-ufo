@@ -6,6 +6,10 @@ import Loading from '../components/Loading';
 
 import type { event } from '../types/event';
 
+import Box from '@mui/material/Box';
+import styled from "@emotion/styled";
+
+
 export default function Event() {
     let params = useParams();
 
@@ -36,9 +40,25 @@ export default function Event() {
         }
     }
 
+    const BoxStyled = styled(Box)`
+        display: flex;
+        flex-direction: column;
+        color: white;
+        padding-left: 10px;
+        border: solid #38444D;
+        border-width: 2px;
+        width: 95%;
+        // margin: 0 10px;
+    `
+
     return (
         <>
             <BackgroundStyled>
+                <BoxStyled>
+                    <p>test</p>
+
+                </BoxStyled>
+            
                 <div className='event'>
                     {!event
                         ? <Loading />

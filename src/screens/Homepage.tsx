@@ -212,19 +212,7 @@ function Homepage({ isAdmin }: Props) {
             <DialogNewEvent open={openDNE} handleClose={handleCloseDNE} handleValid={handleValidDNE} />
 
             <BackgroundStyled>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        // width: '80%',
-                        // ml: '10%'
-                    }}
-                >
-                    {/* <h1 className="title">UFOLEP</h1>
-                        <h2 className="test">TEST GRADIENT LINEAR</h2> */}
-                    <img src="ufolep.png" className="logo-ufolep" alt="Ufolep" />
-                </Box>
+                
                 <Grid container direction="row" justifyContent="flex-end" sx={{ mt: 2 }}>
                     <Grid item sx={{mr: 2}}>
                         <Buttons onClick={handleClickOpenDNE}>
