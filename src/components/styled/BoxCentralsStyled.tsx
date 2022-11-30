@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import styled from "@emotion/styled";
 
 interface Props {
-    children?: ReactElement[]
+    children?: ReactElement[] | ReactElement
 
 }
 export default function BoxCentralsStyled({ children}: Props) {
