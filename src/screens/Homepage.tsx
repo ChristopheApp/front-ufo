@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { event } from '../types/event';
 
 import BackgroundStyled from '../components/styled/BackgroundStyled';
-import DialogNewEvent from '../components/DialogNewEvent';
+import DialogNewEvent from '../components/dialog/DialogNewEvent';
 import PaperEvent from '../components/PaperEvent';
 import SnackAlert from '../components/SnackAlert';
 import Buttons from '../components/Buttons';
@@ -85,6 +85,7 @@ function Homepage({ isAdmin }: Props) {
         const data = {
             name: event.name,
             location: event.location,
+            description: event.description,
             start_date: new Date(event.date_start),
             end_date: new Date(event.date_end),
             state: "En création"

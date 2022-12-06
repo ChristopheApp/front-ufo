@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
+import DialogUpdateEvent from '../components/dialog/DialogUpdateEvent';
 import BoxCentralsStyled from "../components/styled/BoxCentralsStyled";
 import BackgroundStyled from '../components/styled/BackgroundStyled';
 import ButtonEditStyled from '../components/styled/ButtonEditStyled';
@@ -19,6 +20,10 @@ export default function Event() {
 
     const [event, setEvent] = useState<event>();
     const [editMode, setEditMode] = useState<boolean>(false);
+
+    // State to open or close the dialog to update event
+    const [openDUE, setOpenDUE] = useState(false);
+
 
     useEffect(() => {
         console.log(params);
@@ -59,8 +64,31 @@ export default function Event() {
     `
 
 
+     /** 3 Functions to manage Dialog update Event display */
+     const handleClickOpenDUE = () => {
+        setOpenDUE(true);
+        if(event)
+            console.log(new Date(event.date_start).toISOString().split('T')[0])
+    };
+    const handleCloseDUE = () => {
+        setOpenDUE(false);
+    };
+
+    /**
+     * Function to handle the click on the button to update the event from child component,
+     * call the function to update the event in the database and update the state
+     * and close the dialog 
+     * @param {event} event - The event's data to update
+     */
+    const handleValidDUE = (event: event) => {
+        console.log(event);
+        setOpenDUE(false);
+    };
+
     return (
         <>
+            { event ? <DialogUpdateEvent eventProp={event} open={openDUE} handleClose={handleCloseDUE} handleValid={handleValidDUE} /> : <div/>}
+
             <BackgroundStyled>
                 <BoxStyled>
                     <Grid container columns={24} direction="row" justifyContent="space-between" >
@@ -69,7 +97,7 @@ export default function Event() {
                             <BoxCentralsStyled>
                                 <h2>
                                     {event.name}
-                                    {editMode ? <ButtonEditStyled scale={0.7} /> : <div/>}
+                                    {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div/>}
                                 </h2>
 
                                 <h3>{event.location}</h3>
@@ -85,7 +113,7 @@ export default function Event() {
                             <BoxCentralsStyled>
                                 <h3>
                                     Activités
-                                    {editMode ? <ButtonEditStyled scale={0.7} /> : <div/>}
+                                    {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div/>}
                                 </h3>
                             </BoxCentralsStyled>
 
@@ -95,7 +123,7 @@ export default function Event() {
                             <BoxCentralsStyled>
                                 <h3>
                                     Equipes
-                                    {editMode ? <ButtonEditStyled scale={0.7} /> : <div/>}
+                                    {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div/>}
                                 </h3>
                             </BoxCentralsStyled>
 

@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {event} from '../types/event';
+import React, { useState, useEffect } from 'react';
+import { event } from '../../types/event';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -31,13 +31,14 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
     const [event, setEvent] = useState<event>({
         name: '',
         location: '',
+        description: '',
         date_start: '',
         date_end: ''
     });
 
     // Function to handle the change of the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEvent(prev=>({...prev, [e.target.name]: e.target.value}))
+        setEvent(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
     /**
@@ -47,14 +48,14 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
     const validForm = () => {
         console.log(event.name)
         console.log(event.location)
-        console.log(typeof(event.date_start), new Date(event.date_start))
-        console.log( new Date(event.date_end))
+        console.log(typeof (event.date_start), new Date(event.date_start))
+        console.log(new Date(event.date_end))
         console.log(JSON.stringify(new Date(Date.now())))
         const date1 = new Date(event.date_start)
         const date2 = new Date(event.date_end)
-        if(date1 > date2){
+        if (date1 > date2) {
             console.log("La date de début doit être inférieure à la date de fin")
-        }else{
+        } else {
             console.log("La date de début est inférieure à la date de fin")
             handleValid(event)
             console.log(event)
@@ -88,6 +89,7 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                     </DialogContentText>
                     <TextField
                         autoFocus
+                        required
                         margin="dense"
                         id="name"
                         label="Nom"
@@ -100,6 +102,7 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                     />
                     <TextField
                         autoFocus
+                        required
                         margin="dense"
                         id="lieu"
                         label="Lieu"
@@ -110,68 +113,93 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
                         name="location"
                         onChange={handleChange}
                     />
-                    <Box 
+                    <Box
                         sx={{
                             display: 'flex',
                             flexDirection: 'row',
-                            justifyContent: 'space-between',
                         }}
                     >
-
-                    <TextField
-                        
-                        autoFocus
-                        margin="dense"
-                        id="startDate"
-                        label="Date Début"
-                        type="date"
-                        fullWidth={false}
-                        variant="standard"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                          value={event.date_start}
-                          name="date_start"
-                          onChange={handleChange}
-                          />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="endDate"
-                        label="Date Fin"
-                        type="date"
-                        fullWidth={false}
-                        variant="standard"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                        value={event.date_end}
-                        name="date_end"
-                        onChange={handleChange}
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="description"
+                            label="Description"
+                            multiline
+                            rows={4}
+                            type=""
+                            fullWidth={true}
+                            variant="standard"
+                            value={event.description}
+                            name="description"
+                            onChange={handleChange}
                         />
+
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+
+                            <TextField
+
+                                autoFocus
+                                required
+                                margin="dense"
+                                id="startDate"
+                                label="Date Début"
+                                type="date"
+                                fullWidth={false}
+                                variant="standard"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                value={event.date_start}
+                                name="date_start"
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                autoFocus
+                                required
+                                margin="dense"
+                                id="endDate"
+                                label="Date Fin"
+                                type="date"
+                                fullWidth={false}
+                                variant="standard"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                value={event.date_end}
+                                name="date_end"
+                                onChange={handleChange}
+                            />
                         </Box>
-                    
+                    </Box>
+
+
                 </DialogContent>
                 <DialogActions>
-                    <Button 
-                        variant="contained" 
-                        color="error" 
+                    <Button
+                        variant="contained"
+                        color="error"
                         startIcon={<CloseRoundedIcon />}
-                        onClick={handleClose} 
+                        onClick={handleClose}
                     >
                         Annuler
                     </Button>
 
-                    <Button 
-                        variant="contained" 
-                        color={colorButtonCreate()} 
-                        endIcon={<EventAvailableRoundedIcon />} 
+                    <Button
+                        variant="contained"
+                        color={colorButtonCreate()}
+                        endIcon={<EventAvailableRoundedIcon />}
                         onClick={validForm}
                         disabled={disabledButtonCreate()}
                     >
                         Créer
                     </Button>
-                    
+
 
                 </DialogActions>
             </Dialog>
