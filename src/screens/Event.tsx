@@ -45,8 +45,11 @@ export default function Event() {
             const result = await response.json();
             console.log(result);
             setEvent(result[0])
+            console.log(result[0].state)
             if (result[0].state === 'En création') {
                 setEditMode(true);
+            } else {
+                setEditMode(false);
             }
         }
         catch (err) {
@@ -125,6 +128,43 @@ export default function Event() {
         }
     }
 
+    const handleLockEvent = async () => {
+        const data = { 
+            id: event?._id,
+            date_end: event?.date_end,
+        }
+
+        try {
+            const response = await fetch(`http://localhost:3000/events/lock/${event?._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.status !== 200) {
+                throw new Error(`Erreur HTTP : ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log(result);
+
+        } catch(err) {
+            console.error("Error while locking event", err);
+        }
+    }
+
+    const lockEvent = () => {
+        handleLockEvent()
+        .then(() => {
+            console.log("lock event then relaod event")
+            if (params.id) {
+                fetchEvent(params.id);
+            }
+        })
+    }
+
     return (
         <>
             {event ? <DialogUpdateEvent eventProp={event} open={openDUE} handleClose={handleCloseDUE} handleValid={handleValidDUE} /> : <div />}
@@ -148,7 +188,7 @@ export default function Event() {
                                                 <h3>{event.state}</h3>
                                             </Grid>
                                             <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                                                {editMode ? <Buttons onClick={handleValidEvent}>Valider évènement</Buttons> : <div />}
+                                                {editMode ? <Buttons onClick={lockEvent}>Verrouiller évènement</Buttons> : <div />}
                                             </Grid>
                                         </Grid>
                                     </Box>
