@@ -45,7 +45,7 @@ export default function BoxEvent({ children, event,  isAdmin, handleClickEvent}:
 
     return (
         <BoxStyled onClick={() => handleClickEvent(event)}>
-            {event.state === "En création" ? <ButtonEdit onClick={()=> navigate(`event/${event._id}`)} scale={1} mr={10} /> : <ButtonMore onClick={()=> navigate(`event/${event._id}`)} />}
+            {!event.locked ? <ButtonEdit onClick={()=> navigate(`event/${event._id}`)} scale={1} mr={10} /> : <ButtonMore onClick={()=> navigate(`event/${event._id}`)} />}
             <p>
                 {event.name}
             </p>

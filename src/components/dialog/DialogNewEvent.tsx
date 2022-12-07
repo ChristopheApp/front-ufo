@@ -33,7 +33,8 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
         location: '',
         description: '',
         date_start: '',
-        date_end: ''
+        date_end: '',
+        locked: false
     });
 
     // Function to handle the change of the inputs

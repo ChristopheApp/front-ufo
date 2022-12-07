@@ -9,6 +9,8 @@ import Buttons from '../components/Buttons';
 import Loading from '../components/Loading';
 
 import type { event } from '../types/event';
+
+import getState from "../utils/getState";
 import formatDate from "../utils/formatDate";
 
 
@@ -45,8 +47,8 @@ export default function Event() {
             const result = await response.json();
             console.log(result);
             setEvent(result[0])
-            console.log(result[0].state)
-            if (result[0].state === 'En création') {
+            console.log(result[0].locked)
+            if (!result[0].locked) {
                 setEditMode(true);
             } else {
                 setEditMode(false);
@@ -104,7 +106,6 @@ export default function Event() {
             date_start: event.date_start,
             date_end: event.date_end,
             description: event.description,
-            state: event.state,
         }
 
         try {
@@ -185,7 +186,7 @@ export default function Event() {
                                     <Box >
                                         <Grid container columns={12} direction="row" justifyContent="space-between" >
                                             <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                                                <h3>{event.state}</h3>
+                                                <h3>{getState(event)}</h3>
                                             </Grid>
                                             <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                                                 {editMode ? <Buttons onClick={lockEvent}>Verrouiller évènement</Buttons> : <div />}

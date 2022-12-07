@@ -2,6 +2,7 @@ import React, {useState, useEffect, ReactElement} from "react"
 import { Link } from "react-router-dom";
 
 import formatDate from "../utils/formatDate";
+import getState from "../utils/getState";
 
 import styled from "@emotion/styled";
 
@@ -21,15 +22,9 @@ export default function BoxCentralMain({ children, event,  isAdmin}: Props) {
     const [textStateEvent, setTextStateEvent] = useState<string>("En cours")
 
     useEffect(() => {
-        if(event.state === "En création"){
-            setTextStateEvent("En création")
-        }
-        else if(event.state === "En cours"){
-            setTextStateEvent("En cours")
-        }
-        else if(event.state === "Terminé"){
-            setTextStateEvent("Terminé")
-        }
+
+        setTextStateEvent(getState(event))
+
     }, [])
 
     const FloatingTextProcess = styled.p`
@@ -54,8 +49,8 @@ export default function BoxCentralMain({ children, event,  isAdmin}: Props) {
         <>
             <BoxCentralsStyled>
                 <DivButton to={`event/${event._id}`}>
-                    {event.state === "En création" ?<FloatingTextProcess>{textStateEvent}</FloatingTextProcess> : <FloatingTextCreated>{textStateEvent}</FloatingTextCreated>}
-                    {event.state === "En création" ? <ButtonEdit scale={0.5} mr={0} /> : <ButtonMore />}
+                    {!event.locked ?<FloatingTextProcess>{textStateEvent}</FloatingTextProcess> : <FloatingTextCreated>{textStateEvent}</FloatingTextCreated>}
+                    {!event.locked ? <ButtonEdit scale={0.5} mr={0} /> : <ButtonMore />}
                 </DivButton>
                 <h2>
                     {event.name}

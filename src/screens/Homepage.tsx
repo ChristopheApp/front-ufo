@@ -64,7 +64,7 @@ function Homepage({ isAdmin }: Props) {
             setEvents(result)
 
             result.forEach((event: event) => {
-                if(event.state === "En création"){
+                if(!event.locked){
                     setEventsInProgress((eventsInProgress) => [...eventsInProgress, event]);
                 } else {
                     setEventsCreated(eventsCreated => [...eventsCreated, event])
@@ -88,7 +88,7 @@ function Homepage({ isAdmin }: Props) {
             description: event.description,
             start_date: new Date(event.date_start),
             end_date: new Date(event.date_end),
-            state: "En création"
+            locked: false
         }
 
         try {
