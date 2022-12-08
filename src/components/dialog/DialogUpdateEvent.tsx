@@ -33,6 +33,7 @@ export default function DialogNewEvent({ eventProp, open, handleClose, handleVal
 
     // Function to handle the change of the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value)
         setEvent(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 

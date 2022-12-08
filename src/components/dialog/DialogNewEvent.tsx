@@ -49,6 +49,7 @@ export default function DialogNewEvent({ open, handleClose, handleValid }: Props
     const validForm = () => {
         console.log(event.name)
         console.log(event.location)
+        console.log(event.date_start)
         console.log(typeof (event.date_start), new Date(event.date_start))
         console.log(new Date(event.date_end))
         console.log(JSON.stringify(new Date(Date.now())))
