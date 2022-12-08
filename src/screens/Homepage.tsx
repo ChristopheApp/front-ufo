@@ -65,7 +65,7 @@ function Homepage({ isAdmin }: Props) {
 
             result.forEach((event: event) => {
                 if(!event.locked){
-                    setEventsInProgress((eventsInProgress) => [...eventsInProgress, event]);
+                    setEventsInProgress((eventsInProgress) => [...eventsInProgress, event].sort((a, b) => new Date(a.date_start).getTime() - new Date(b.date_start).getTime()));
                 } else {
                     setEventsCreated(eventsCreated => [...eventsCreated, event])
                 } 
@@ -244,7 +244,7 @@ function Homepage({ isAdmin }: Props) {
                             event={eventCentral}
                             isAdmin={isAdmin}
                         />
-                        : <p>tg</p>}
+                        : <p>DES LOGOS PARTOUT</p>}
                     </Grid>
 
                        

@@ -19,7 +19,7 @@ interface Props {
 }
 export default function BoxCentralMain({ children, event,  isAdmin}: Props) {
 
-    const [textStateEvent, setTextStateEvent] = useState<string>("En cours")
+    const [textStateEvent, setTextStateEvent] = useState<string>("")
 
     useEffect(() => {
 
