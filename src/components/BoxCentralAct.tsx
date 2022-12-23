@@ -8,6 +8,12 @@ interface Props {
     isAdmin: boolean
 }
 export default function BoxCentralAct({ children, event,  isAdmin}: Props) {
+
+    useEffect(() => {
+
+    }, [event])
+
+    
     return(
         <>
             <BoxCentralsStyled>
