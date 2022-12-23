@@ -15,7 +15,7 @@ export default function BoxCentralDesc({ children, event,  isAdmin}: Props) {
             <BoxCentralsStyled>
                 <h3>Description</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris enim, rhoncus ut varius eu, lacinia at urna. Phasellus eu mattis tortor.
+                    {event.description}
                 </p>
             </BoxCentralsStyled>
         </>

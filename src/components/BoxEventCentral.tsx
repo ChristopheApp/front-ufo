@@ -47,7 +47,7 @@ export default function BoxEventCentral({ children, event,  isAdmin}: Props) {
     return (
         <BoxStyled>
             <BoxCentralMain event={event} isAdmin={true} />
-            <BoxCentralDesc event={event} isAdmin={true} />
+            { event.description ? <BoxCentralDesc event={event} isAdmin={true} /> : null}
             <BoxCentralAct event={event} isAdmin={true} />
             {/* {event.state === "En création" ? <ButtonEdit /> : <ButtonMore />}
             <p>

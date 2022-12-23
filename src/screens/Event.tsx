@@ -9,6 +9,7 @@ import Buttons from '../components/Buttons';
 import Loading from '../components/Loading';
 
 import type { event } from '../types/event';
+import type { activity } from '../types/activity';
 
 import getState from "../utils/getState";
 import formatDate from "../utils/formatDate";
@@ -23,6 +24,7 @@ export default function Event() {
 
     const [event, setEvent] = useState<event>();
     const [editMode, setEditMode] = useState<boolean>(false);
+    const [activities, setActivities] = useState<activity[]>([]);
 
     // State to open or close the dialog to update event
     const [openDUE, setOpenDUE] = useState(false);
@@ -31,7 +33,10 @@ export default function Event() {
     useEffect(() => {
         console.log(params);
         if (params.id) {
-            fetchEvent(params.id);
+            fetchEvent(params.id)
+            fetchActivities(params.id)
+            
+            
         }
     }, [])
 
@@ -56,6 +61,24 @@ export default function Event() {
         }
         catch (err) {
             console.error("Error while fetching event", err);
+        }
+    }
+
+    const fetchActivities = async (id: string) => {
+        try {
+            const response = await fetch(`http://localhost:3000/activities/?eventid=${id}`);
+            console.log(response)
+
+            if (response.status !== 200) {
+                throw new Error(`Erreur HTTP : ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log(result);
+            setActivities(result)
+
+        } catch (err) {
+            console.error("Error while fetching activities", err);
         }
     }
 
@@ -205,6 +228,9 @@ export default function Event() {
                                     Activités
                                     {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div />}
                                 </h3>
+                                <div>
+                                    {activities.map((activity) => <p>{activity.name}</p>)}
+                                </div>
                             </BoxCentralsStyled>
 
                         </Grid>
@@ -215,6 +241,7 @@ export default function Event() {
                                     Equipes
                                     {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div />}
                                 </h3>
+                                
                             </BoxCentralsStyled>
 
                         </Grid>
