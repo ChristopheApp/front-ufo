@@ -1,5 +1,9 @@
 import React, {useState, useEffect, ReactElement} from "react"
 import type { event } from "../types/event";
+import type { activity } from "../types/activity";
+
+import fetchActivities from "../fetchers/fetchActivities";
+
 import BoxCentralsStyled from "./styled/BoxCentralsStyled";
 
 interface Props {
@@ -9,17 +13,24 @@ interface Props {
 }
 export default function BoxCentralAct({ children, event,  isAdmin}: Props) {
 
-    useEffect(() => {
+    const [activities, setActivities] = useState<activity[]>([])
 
+    useEffect(() => {
+        if(event._id) {
+            fetchActivities(event._id.toString())
+            .then((data) => {
+                setActivities(data)
+            })
+        }
     }, [event])
 
-    
+
     return(
         <>
             <BoxCentralsStyled>
                 <h3>Activités</h3>
                 <p>
-                    {event.activities}
+                    {activities.map((activity) => activity.name).join(", ")}
                 </p>
 
             </BoxCentralsStyled>

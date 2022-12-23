@@ -35,7 +35,8 @@ export default function Event() {
         console.log(params);
         if (params.id) {
             fetchEvent(params.id)
-            fetchActivities(params.id).then((activities) => {
+            fetchActivities(params.id)
+            .then((activities) => {
                 console.log(activities)
                 setActivities(activities);
             })
@@ -217,7 +218,7 @@ export default function Event() {
                                     {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div />}
                                 </h3>
                                 <div>
-                                    {activities.map((activity, i) => <p key={i}>{activity.name}</p>)}
+                                    {activities.map((activity) => activity.name).join(", ")}
                                 </div>
                             </BoxCentralsStyled>
 
