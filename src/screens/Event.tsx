@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
+import FormAddActivity from '../components/forms/FormAddActivity';
+import FormActivities from '../components/forms/FormActivities';
 import DialogUpdateEvent from '../components/dialog/DialogUpdateEvent';
 import BoxCentralsStyled from "../components/styled/BoxCentralsStyled";
 import BackgroundStyled from '../components/styled/BackgroundStyled';
 import ButtonEditStyled from '../components/styled/ButtonEditStyled';
-import Buttons from '../components/Buttons';
+import Buttons from '../components/buttons/Buttons';
 import Loading from '../components/Loading';
 
 import type { event } from '../types/event';
@@ -29,6 +31,9 @@ export default function Event() {
 
     // State to open or close the dialog to update event
     const [openDUE, setOpenDUE] = useState(false);
+    const [openFormActivities, setOpenFormActivities] = useState(false);
+    const [openFormAddActivity, setOpenFormAddActivity] = useState(false);
+
 
 
     useEffect(() => {
@@ -178,9 +183,34 @@ export default function Event() {
         })
     }
 
+    function handleClickFormActivities () {
+        setOpenFormActivities(true)
+    }
+    function handleCloseFormActivities() {
+        setOpenFormActivities(false)
+    }
+    function handleValidFormActivities() {
+        console.log("valid form activities")
+        handleCloseFormActivities()
+    }
+
+    function handleClickFormAddActivity () {
+        setOpenFormAddActivity(true)
+        console.log("form add act")
+    }
+    function handleCloseFormAddActivity() {
+        setOpenFormAddActivity(false)
+    }
+    function handleValidFormAddActivity() {
+        console.log("valid form add activity")
+        handleCloseFormAddActivity()
+    }
+
     return (
         <>
-            {event ? <DialogUpdateEvent eventProp={event} open={openDUE} handleClose={handleCloseDUE} handleValid={handleValidDUE} /> : <div />}
+            {event ? <DialogUpdateEvent eventProp={event} open={openDUE} handleClose={handleCloseDUE} handleValid={handleValidDUE} /> : null}
+            {event ? <FormActivities eventProp={event} open={openFormActivities} handleClose={handleCloseFormActivities} handleValid={handleValidFormActivities} handleAddActivity={handleClickFormAddActivity} /> : null}
+            {event ? <FormAddActivity eventProp={event} open={openFormAddActivity} handleClose={handleCloseFormAddActivity} handleValid={handleValidFormAddActivity} /> : null}
 
             <BackgroundStyled>
                 <BoxStyled>
@@ -215,7 +245,7 @@ export default function Event() {
                             <BoxCentralsStyled>
                                 <h3>
                                     Activités
-                                    {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div />}
+                                    {editMode ? <ButtonEditStyled onClick={handleClickFormActivities} scale={0.7} /> : <div />}
                                 </h3>
                                 <div>
                                     {activities.map((activity) => activity.name).join(", ")}

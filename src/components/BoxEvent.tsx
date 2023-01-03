@@ -9,8 +9,8 @@ import styled from "@emotion/styled";
 
 import type { event } from "../types/event";
 
-import ButtonMore from './ButtonMore'
-import ButtonEdit from './ButtonEdit'
+import ButtonMore from './buttons/ButtonMore'
+import ButtonEdit from './buttons/ButtonEdit'
 
 interface Props {
     children?: ReactElement

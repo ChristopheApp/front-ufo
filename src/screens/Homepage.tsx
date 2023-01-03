@@ -5,7 +5,7 @@ import BackgroundStyled from '../components/styled/BackgroundStyled';
 import DialogNewEvent from '../components/dialog/DialogNewEvent';
 import PaperEvent from '../components/PaperEvent';
 import SnackAlert from '../components/SnackAlert';
-import Buttons from '../components/Buttons';
+import Buttons from '../components/buttons/Buttons';
 import BoxEvents from '../components/BoxEvents';
 import BoxEventCentral from '../components/BoxEventCentral';
 
