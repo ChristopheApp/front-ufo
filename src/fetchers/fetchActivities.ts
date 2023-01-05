@@ -1,9 +1,14 @@
 import type {activity} from '../types/activity'
 
-const fetchActivities = async (id: string) :Promise<activity[]> => {
+const fetchActivities = async (id?: string) :Promise<activity[]> => {
     let activities = [] as activity[];
+    let response;
     try {
-        const response = await fetch(`http://localhost:3000/activities/?eventid=${id}`);
+        if(id)
+            response = await fetch(`http://localhost:3000/activities/?eventid=${id}`);
+        else
+            response = await fetch(`http://localhost:3000/activities/`);
+
         console.log(response)
 
         if (response.status !== 200) {

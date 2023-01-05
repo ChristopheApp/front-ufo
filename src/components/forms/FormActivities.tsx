@@ -21,7 +21,7 @@ interface Props {
     handleValid: () => void;
     handleAddActivity: () => void;
     eventProp: event;
-    activities?: activity
+    activities?: activity[]
 }
 
 export default function FormActivities({ eventProp, open, handleClose, handleValid, handleAddActivity, activities }: Props) {
@@ -39,7 +39,7 @@ export default function FormActivities({ eventProp, open, handleClose, handleVal
                         Ajouter, supprimer ou modifier des activités.
                     </DialogContentText>
 
-                    {!activities ? <p>Aucune activité</p> : <p>Des activités <ButtonEdit/></p>}
+                    {!activities ? <p>Aucune activité</p> : activities.map((activité, i) => {<TextField key={i}>Des activités <ButtonEdit/></TextField>})}
 
                     <ButtonAdd
                         onClick={handleAddActivity}
