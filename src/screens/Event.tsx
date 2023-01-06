@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
-
+import FormEditActivity from '../components/forms/FormEditActivity';
 import FormAddActivity from '../components/forms/FormAddActivity';
 import FormActivities from '../components/forms/FormActivities';
 import DialogUpdateEvent from '../components/dialog/DialogUpdateEvent';
@@ -29,11 +29,13 @@ export default function Event() {
     const [editMode, setEditMode] = useState<boolean>(false);
     const [eventActivities, setEventActivities] = useState<activity[]>([]);
     const [allActivities, setAllActivities] = useState<activity[]>([]);
+    const [activityToEdit, setActivityToEdit] = useState<activity>();
 
     // State to open or close the dialog to update event
     const [openDUE, setOpenDUE] = useState(false);
     const [openFormActivities, setOpenFormActivities] = useState(false);
     const [openFormAddActivity, setOpenFormAddActivity] = useState(false);
+    const [openFormEditActivity, setOpenFormEditActivity] = useState(false);
 
 
 
@@ -217,12 +219,29 @@ export default function Event() {
         handleCloseFormAddActivity()
     }
 
+    function handleClickFormEditActivity(activity: activity) {
+        console.log("edit activity")
+        console.log(activity)
+        setActivityToEdit(activity)
+        setOpenFormEditActivity(true)
+    }
+
+    function handleCloseFormEditActivity() {
+        setOpenFormEditActivity(false)
+    }
+
+    function handleValidFormEditActivity(activity: activity) {
+        console.log("valid form edit activity")
+        console.log(activity)
+        handleCloseFormEditActivity()
+    }
+
     return (
         <>
             {event ? <DialogUpdateEvent eventProp={event} open={openDUE} handleClose={handleCloseDUE} handleValid={handleValidDUE} /> : null}
-            {event ? <FormActivities eventProp={event} open={openFormActivities} handleClose={handleCloseFormActivities} handleValid={handleValidFormActivities} handleAddActivity={handleClickFormAddActivity} activities={eventActivities} /> : null}
+            {event ? <FormActivities eventProp={event} open={openFormActivities} handleClose={handleCloseFormActivities} handleValid={handleValidFormActivities} handleAddActivity={handleClickFormAddActivity} handleEditActivity={handleClickFormEditActivity} activities={eventActivities} /> : null}
             {event ? <FormAddActivity eventProp={event} open={openFormAddActivity} handleClose={handleCloseFormAddActivity} handleValid={handleValidFormAddActivity} activities={allActivities}/> : null}
-
+            {activityToEdit && event ? <FormEditActivity eventProp={event} open={openFormEditActivity} handleClose={handleCloseFormEditActivity} handleValid={handleValidFormEditActivity} activityToEdit={activityToEdit}/> : null}
             <BackgroundStyled>
                 <BoxStyled>
                     <Grid container columns={24} direction="row" justifyContent="space-between" >

@@ -6,9 +6,18 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Button from '@mui/material/Button';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
+import TextField from '@mui/material/TextField';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 
+import PersonIcon from '@mui/icons-material/Person';
+import AddIcon from '@mui/icons-material/Add';
 import ButtonAdd from '../buttons/ButtonAdd';
 import ButtonEdit from '../buttons/ButtonEdit';
+import ButtonTrash from '../buttons/ButtonTrash';
 
 
 import type { event } from "../../types/event";
@@ -20,27 +29,45 @@ interface Props {
     handleClose: () => void;
     handleValid: () => void;
     handleAddActivity: () => void;
+    handleEditActivity: (activity: activity) => void;
     eventProp: event;
-    activities?: activity[]
+    activities: activity[]
 }
 
-export default function FormActivities({ eventProp, open, handleClose, handleValid, handleAddActivity, activities }: Props) {
+export default function FormActivities({ eventProp, open, handleClose, handleValid, handleAddActivity, handleEditActivity, activities }: Props) {
 
     // function handleAddActivity() {
     //     console.log("open add activity form")
     // }
 
+    console.log(activities)
     return (
         <>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Activités</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Ajouter, supprimer ou modifier des activités.
+                        Ajouter, supprimer ou modifier des activités à l'évènement {eventProp.name}.
                     </DialogContentText>
+                    
+                    {activities.length > 0 ?
+                        <List>
+                            {activities.map((activity, i) => (
+                                <ListItem disableGutters>
+                                    <ListItemButton onClick={() => console.log(activity.name)} key={i}>
+                                        <ButtonEdit onClick={() => handleEditActivity(activity)} />
+                                        <ListItemText primary={activity.name} />
+                                        <ButtonTrash />
+                                    </ListItemButton>
 
-                    {!activities ? <p>Aucune activité</p> : activities.map((activité, i) => {<TextField key={i}>Des activités <ButtonEdit/></TextField>})}
-
+                                </ListItem>
+                            ))}
+                        </List>
+                        :
+                        <DialogContentText>
+                            Aucune activité sur cet événement.
+                        </DialogContentText>
+                    }
                     <ButtonAdd
                         onClick={handleAddActivity}
                     />
@@ -61,7 +88,7 @@ export default function FormActivities({ eventProp, open, handleClose, handleVal
                         // color={colorButtonValid()}
                         endIcon={<EventAvailableRoundedIcon />}
                         onClick={handleValid}
-                        // disabled={disabledButtonValid()}
+                    // disabled={disabledButtonValid()}
                     >
                         Enregistrer
                     </Button>
