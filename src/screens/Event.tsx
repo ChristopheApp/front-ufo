@@ -208,7 +208,7 @@ export default function Event() {
         setOpenFormAddActivity(false)
         setOpenFormActivities(true)
     }
-    function handleValidFormAddActivity(eventId: number, activity: activity) {
+    function handleValidFormAddActivity(eventId: number | undefined, activity: activity) {
         createActivity(eventId, activity)
 
         // save activity in database
@@ -235,7 +235,7 @@ export default function Event() {
             handleCloseFormEditActivity()
         
         }
-    }
+    
 
     return (
         <>

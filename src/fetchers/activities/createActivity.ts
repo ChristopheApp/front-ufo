@@ -1,9 +1,9 @@
 import type {activity} from '../../types/activity'
 
-const createActivity = async (eventId: number, activity: activity) :Promise<activity | undefined> => {
+const createActivity = async (eventId: number | undefined, activity: activity) :Promise<activity | undefined> => {
 
     console.log("createActivity", eventId, activity)
-    
+
     const data = {
         name: activity.name,
         nb_fields: activity.nb_fields,

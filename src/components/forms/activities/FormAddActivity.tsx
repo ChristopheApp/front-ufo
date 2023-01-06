@@ -18,7 +18,7 @@ interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
-    handleValid: (eventId: number, activity: activity) => void;
+    handleValid: (eventId: number | undefined, activity: activity) => void;
     eventProp: event;
     activities: activity[]
 }
