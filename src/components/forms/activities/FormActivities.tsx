@@ -15,13 +15,13 @@ import ListItemText from '@mui/material/ListItemText';
 
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
-import ButtonAdd from '../buttons/ButtonAdd';
-import ButtonEdit from '../buttons/ButtonEdit';
-import ButtonTrash from '../buttons/ButtonTrash';
+import ButtonAdd from '../../buttons/ButtonAdd';
+import ButtonEdit from '../../buttons/ButtonEdit';
+import ButtonTrash from '../../buttons/ButtonTrash';
 
 
-import type { event } from "../../types/event";
-import { activity } from '../../types/activity';
+import type { event } from "../../../types/event";
+import { activity } from '../../../types/activity';
 
 interface Props {
     children?: React.ReactNode;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
-import FormEditActivity from '../components/forms/FormEditActivity';
-import FormAddActivity from '../components/forms/FormAddActivity';
-import FormActivities from '../components/forms/FormActivities';
+import FormEditActivity from '../components/forms/activities/FormEditActivity';
+import FormAddActivity from '../components/forms/activities/FormAddActivity';
+import FormActivities from '../components/forms/activities/FormActivities';
 import DialogUpdateEvent from '../components/dialog/DialogUpdateEvent';
 import BoxCentralsStyled from "../components/styled/BoxCentralsStyled";
 import BackgroundStyled from '../components/styled/BackgroundStyled';
