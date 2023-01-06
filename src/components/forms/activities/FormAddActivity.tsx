@@ -18,7 +18,7 @@ interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
-    handleValid: (activity: activity) => void;
+    handleValid: (eventId: number, activity: activity) => void;
     eventProp: event;
     activities: activity[]
 }
@@ -32,7 +32,7 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
 
     const [value, setValue] = useState<activity | null>(null);
     const [inputValue, setInputValue] = useState('');
-    //const [event, setEvent] = useState<event>(eventProp);
+    const [event, setEvent] = useState<event>(eventProp);
     const [activity, setActivity] = useState<activity>({
         name: "",
         nb_fields: 0,
@@ -76,7 +76,7 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
                         value={value}
                         onChange={(event: any, newValue: activity | null) => {
                             autoFillActivity(newValue);
-                            setValue(newValue);
+                            //setValue(newValue);
                         }}
                         renderInput={(params) => <TextField {...params} />}
                     />
@@ -154,7 +154,7 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
                         variant="contained"
                         // color={colorButtonValid()}
                         endIcon={<EventAvailableRoundedIcon />}
-                        onClick={() => handleValid(activity)}
+                        onClick={() => handleValid(event._id, activity)}
                     // disabled={disabledButtonValid()}
                     >
                         Enregistrer

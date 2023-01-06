@@ -1,4 +1,4 @@
-import type {activity} from '../types/activity'
+import type {activity} from '../../types/activity'
 
 const fetchActivities = async (id?: string) :Promise<activity[]> => {
     let activities = [] as activity[];

@@ -13,7 +13,8 @@ import Loading from '../components/Loading';
 import type { event } from '../types/event';
 import type { activity } from '../types/activity';
 
-import fetchActivities from '../fetchers/fetchActivities';
+import fetchActivities from '../fetchers/activities/fetchActivities';
+import createActivity from '../fetchers/activities/createActivity';
 import getState from "../utils/getState";
 import formatDate from "../utils/formatDate";
 
@@ -207,7 +208,9 @@ export default function Event() {
         setOpenFormAddActivity(false)
         setOpenFormActivities(true)
     }
-    function handleValidFormAddActivity(activity: activity) {
+    function handleValidFormAddActivity(eventId: number, activity: activity) {
+        createActivity(eventId, activity)
+
         // save activity in database
         console.log("valid form add activity")
         console.log(activity)
@@ -227,9 +230,11 @@ export default function Event() {
     }
 
     function handleValidFormEditActivity(activity: activity) {
-        console.log("valid form edit activity")
-        console.log(activity)
-        handleCloseFormEditActivity()
+            console.log("valid form edit activity")
+            console.log(activity)
+            handleCloseFormEditActivity()
+        
+        }
     }
 
     return (

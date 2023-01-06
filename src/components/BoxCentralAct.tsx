@@ -2,7 +2,7 @@ import {useState, useEffect, ReactElement} from "react"
 import type { event } from "../types/event";
 import type { activity } from "../types/activity";
 
-import fetchActivities from "../fetchers/fetchActivities";
+import fetchActivities from "../fetchers/activities/fetchActivities";
 
 import BoxCentralsStyled from "./styled/BoxCentralsStyled";
 
