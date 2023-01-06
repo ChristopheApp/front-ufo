@@ -16,13 +16,13 @@ interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
-    handleValid: (event: event) => void;
+    handleValid: (event: any) => void;
 }
 
 export default function DialogNewEvent({ open, handleClose, handleValid }: Props) {
 
     // State to store the new event
-    const [event, setEvent] = useState<event>({
+    const [event, setEvent] = useState({
         name: '',
         location: '',
         description: '',

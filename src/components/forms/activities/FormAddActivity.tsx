@@ -18,7 +18,7 @@ interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
-    handleValid: (eventId: number | undefined, activity: activity) => void;
+    handleValid: (eventId: number, activity: any) => void;
     eventProp: event;
     activities: activity[]
 }
@@ -33,7 +33,7 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
     const [value, setValue] = useState<activity | null>(null);
     const [inputValue, setInputValue] = useState('');
     const [event, setEvent] = useState<event>(eventProp);
-    const [activity, setActivity] = useState<activity>({
+    const [activity, setActivity] = useState({
         name: "",
         nb_fields: 0,
         nb_teams: 0,

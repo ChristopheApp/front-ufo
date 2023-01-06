@@ -1,6 +1,8 @@
 import type {activity} from '../../types/activity'
 
-const createActivity = async (eventId: number | undefined, activity: activity) :Promise<activity | undefined> => {
+const createActivity = async (eventId: number | undefined, activity: activity) :Promise<activity> => {
+    
+    let activityCreated = {} as activity;
 
     console.log("createActivity", eventId, activity)
 
@@ -28,11 +30,12 @@ const createActivity = async (eventId: number | undefined, activity: activity) :
 
         const result = await response.json();
         console.log(result);
-        return result;
+        activityCreated = result;
 
     } catch (err) {
         console.error("Error while creating activity", err);
     }
+    return activityCreated;
 }
 
 export default createActivity;

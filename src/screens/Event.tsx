@@ -15,6 +15,7 @@ import type { activity } from '../types/activity';
 
 import fetchActivities from '../fetchers/activities/fetchActivities';
 import createActivity from '../fetchers/activities/createActivity';
+import addActivity from '../fetchers/events/addActivity';
 import getState from "../utils/getState";
 import formatDate from "../utils/formatDate";
 
@@ -208,14 +209,21 @@ export default function Event() {
         setOpenFormAddActivity(false)
         setOpenFormActivities(true)
     }
-    function handleValidFormAddActivity(eventId: number | undefined, activity: activity) {
-        createActivity(eventId, activity)
-
-        // save activity in database
+    function handleValidFormAddActivity(eventId: number, activity: activity) {
         console.log("valid form add activity")
         console.log(activity)
-        // Fetch event activities
-        handleCloseFormAddActivity()
+        createActivity(eventId, activity)
+        .then((act) => {
+            console.log(act)
+            addActivity(eventId, act._id)
+            fetchActivities(params.id)
+            .then((activities) => {
+                console.log(activities)
+                setEventActivities(activities);
+            })
+            .then(() => {handleCloseFormAddActivity()})
+            
+        })
     }
 
     function handleClickFormEditActivity(activity: activity) {
