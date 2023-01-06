@@ -1,4 +1,4 @@
-import React, {useState, useEffect, ReactElement} from "react"
+import {useState, useEffect, ReactElement} from "react"
 import { Link } from "react-router-dom";
 
 import formatDate from "../utils/formatDate";
@@ -25,7 +25,7 @@ export default function BoxCentralMain({ children, event,  isAdmin}: Props) {
 
         setTextStateEvent(getState(event))
 
-    }, [])
+    }, [event])
 
     const FloatingTextProcess = styled.p`
     float: right;

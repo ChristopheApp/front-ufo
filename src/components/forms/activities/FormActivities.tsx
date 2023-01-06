@@ -6,15 +6,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Button from '@mui/material/Button';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
-import TextField from '@mui/material/TextField';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
 import ButtonAdd from '../../buttons/ButtonAdd';
 import ButtonEdit from '../../buttons/ButtonEdit';
 import ButtonTrash from '../../buttons/ButtonTrash';
@@ -53,7 +48,7 @@ export default function FormActivities({ eventProp, open, handleClose, handleVal
                     {activities.length > 0 ?
                         <List>
                             {activities.map((activity, i) => (
-                                <ListItem disableGutters>
+                                <ListItem key={i} disableGutters>
                                     <ListItemButton onClick={() => console.log(activity.name)} key={i}>
                                         <ButtonEdit onClick={() => handleEditActivity(activity)} />
                                         <ListItemText primary={activity.name} />

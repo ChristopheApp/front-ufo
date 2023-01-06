@@ -1,4 +1,4 @@
-import React, {useState, useEffect, ReactElement} from "react"
+import {useState, useEffect, ReactElement} from "react"
 import type { event } from "../types/event";
 import type { activity } from "../types/activity";
 

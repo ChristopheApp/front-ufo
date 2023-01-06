@@ -10,9 +10,6 @@ import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-import ButtonAdd from '../../buttons/ButtonAdd';
-import ButtonEdit from '../../buttons/ButtonEdit';
-
 
 import type { event } from "../../../types/event";
 import type { activity } from '../../../types/activity';
@@ -32,19 +29,17 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
         options: activities,
         getOptionLabel: (option: activity) => option.name + " - " + option.nb_fields + " terrains - " + option.nb_teams + " équipes - " + option.points + " points",
     };
-    const flatProps = {
-        options: activities.map((option) => option.name),
-    };
 
     const [value, setValue] = useState<activity | null>(null);
     const [inputValue, setInputValue] = useState('');
-    const [event, setEvent] = useState<event>(eventProp);
+    //const [event, setEvent] = useState<event>(eventProp);
     const [activity, setActivity] = useState<activity>({
         name: "",
         nb_fields: 0,
         nb_teams: 0,
         points: 0,
     });
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setActivity(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -81,6 +76,7 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
                         value={value}
                         onChange={(event: any, newValue: activity | null) => {
                             autoFillActivity(newValue);
+                            setValue(newValue);
                         }}
                         renderInput={(params) => <TextField {...params} />}
                     />

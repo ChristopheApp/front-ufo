@@ -1,4 +1,4 @@
-import React, {useState, useEffect, ReactElement} from "react"
+import {ReactElement} from "react"
 import BoxCentralsStyled from "./styled/BoxCentralsStyled";
 
 import type { event } from "../types/event";

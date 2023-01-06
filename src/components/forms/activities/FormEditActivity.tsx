@@ -8,11 +8,6 @@ import Button from '@mui/material/Button';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-
-import ButtonAdd from '../../buttons/ButtonAdd';
-import ButtonEdit from '../../buttons/ButtonEdit';
-
 
 import type { event } from "../../../types/event";
 import type { activity } from '../../../types/activity';
@@ -28,10 +23,6 @@ interface Props {
 
 export default function FormEditActivity({ eventProp, open, handleClose, handleValid, activityToEdit }: Props) {
 
-
-    const [value, setValue] = useState<activity | null>(null);
-    const [inputValue, setInputValue] = useState('');
-    const [event, setEvent] = useState<event>(eventProp);
     const [activity, setActivity] = useState<activity>(activityToEdit);
 
     useEffect(() => {
@@ -41,18 +32,6 @@ export default function FormEditActivity({ eventProp, open, handleClose, handleV
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setActivity(prev => ({ ...prev, [e.target.name]: e.target.value }))
-    }
-
-    const autoFillActivity = (activity: activity | null) => {
-        if (activity) {
-            console.log(activity)
-            setActivity({
-                name: activity.name,
-                nb_fields: activity.nb_fields,
-                nb_teams: activity.nb_teams,
-                points: activity.points,
-            })
-        }
     }
 
     return (

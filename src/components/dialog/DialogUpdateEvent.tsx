@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { event } from '../../types/event';
 
 import Box from '@mui/material/Box';
@@ -12,10 +12,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
 
-import { convertToObject } from 'typescript';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
-
-
 interface Props {
     children?: React.ReactNode;
     open: boolean;
@@ -25,8 +21,6 @@ interface Props {
 }
 
 export default function DialogNewEvent({ eventProp, open, handleClose, handleValid }: Props) {
-
-    const [bool] = useState(true);
 
     // State to store the new event
     const [event, setEvent] = useState<event>(eventProp);

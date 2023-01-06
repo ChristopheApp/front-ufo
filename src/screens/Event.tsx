@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import FormEditActivity from '../components/forms/activities/FormEditActivity';
 import FormAddActivity from '../components/forms/activities/FormAddActivity';
@@ -18,7 +18,7 @@ import getState from "../utils/getState";
 import formatDate from "../utils/formatDate";
 
 
-import { Box, Grid, Divider } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import styled from "@emotion/styled";
 
 
@@ -51,7 +51,7 @@ export default function Event() {
             
             
         }
-    }, [])
+    }, [params])
 
     const fetchEvent = async (id: string) => {
         try {
@@ -112,10 +112,6 @@ export default function Event() {
         updateEvent(event);
         setEvent(event);
     };
-
-    const handleValidEvent = () => {
-        console.log("valid Event");
-    }
 
     const updateEvent = async (event: event) => {
         console.log(event._id)
