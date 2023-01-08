@@ -15,7 +15,8 @@ import type { activity } from '../types/activity';
 
 import fetchActivities from '../fetchers/activities/fetchActivities';
 import createActivity from '../fetchers/activities/createActivity';
-import addActivity from '../fetchers/events/addActivity';
+import addActivity from '../fetchers/events/addActivityToEvent';
+import removeActivity from '../fetchers/events/removeActivityFromEvent';
 import getState from "../utils/getState";
 import formatDate from "../utils/formatDate";
 
@@ -215,7 +216,7 @@ export default function Event() {
         createActivity(eventId, activity)
         .then((act) => {
             console.log(act)
-            addActivity(eventId, act._id)
+            addActivity(eventId, act)
             fetchActivities(params.id)
             .then((activities) => {
                 console.log(activities)
@@ -242,13 +243,17 @@ export default function Event() {
             console.log(activity)
             handleCloseFormEditActivity()
         
-        }
+    }
+
+    function handleClickRemoveActivity(eventId: number, activity: activity) {
+        removeActivity(eventId, activity)
+    }
     
 
     return (
         <>
             {event ? <DialogUpdateEvent eventProp={event} open={openDUE} handleClose={handleCloseDUE} handleValid={handleValidDUE} /> : null}
-            {event ? <FormActivities eventProp={event} open={openFormActivities} handleClose={handleCloseFormActivities} handleValid={handleValidFormActivities} handleAddActivity={handleClickFormAddActivity} handleEditActivity={handleClickFormEditActivity} activities={eventActivities} /> : null}
+            {event ? <FormActivities eventProp={event} open={openFormActivities} activities={eventActivities} handleClose={handleCloseFormActivities} handleValid={handleValidFormActivities} handleAddActivity={handleClickFormAddActivity} handleRemoveActivity={handleClickRemoveActivity} handleEditActivity={handleClickFormEditActivity} /> : null}
             {event ? <FormAddActivity eventProp={event} open={openFormAddActivity} handleClose={handleCloseFormAddActivity} handleValid={handleValidFormAddActivity} activities={allActivities}/> : null}
             {activityToEdit && event ? <FormEditActivity eventProp={event} open={openFormEditActivity} handleClose={handleCloseFormEditActivity} handleValid={handleValidFormEditActivity} activityToEdit={activityToEdit}/> : null}
             <BackgroundStyled>

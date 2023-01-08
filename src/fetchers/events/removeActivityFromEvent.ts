@@ -1,14 +1,17 @@
+import type {activity} from "../../types/activity"
 
-const addActivity = async (eventId: number, activityId: number) => {
+const removeActivity = async (eventId: number, activity: activity) => {
 
-    console.log("add Activity", eventId, activityId)
+    console.log("remove Activity", eventId, activity)
+    console.log(activity)
+    console.log(activity._id);
 
     const data = {
-        activityId
+        activityId: activity._id
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/events/addactivity/${eventId}`, {
+        const response = await fetch(`http://localhost:3000/events/removeactivity/${eventId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,8 +29,8 @@ const addActivity = async (eventId: number, activityId: number) => {
         return result;
 
     } catch (err) {
-        console.error("Error while creating activity", err);
+        console.error("Error while removing activity from event", err);
     }
 }
 
-export default addActivity;
+export default removeActivity;

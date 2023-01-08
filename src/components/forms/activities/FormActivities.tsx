@@ -24,12 +24,13 @@ interface Props {
     handleClose: () => void;
     handleValid: () => void;
     handleAddActivity: () => void;
+    handleRemoveActivity : (eventId: number, activity: any) => void;
     handleEditActivity: (activity: activity) => void;
     eventProp: event;
     activities: activity[]
 }
 
-export default function FormActivities({ eventProp, open, handleClose, handleValid, handleAddActivity, handleEditActivity, activities }: Props) {
+export default function FormActivities({ eventProp, open, handleClose, handleValid, handleAddActivity, handleRemoveActivity, handleEditActivity, activities }: Props) {
 
     // function handleAddActivity() {
     //     console.log("open add activity form")
@@ -52,7 +53,7 @@ export default function FormActivities({ eventProp, open, handleClose, handleVal
                                     <ListItemButton onClick={() => console.log(activity.name)} key={i}>
                                         <ButtonEdit onClick={() => handleEditActivity(activity)} />
                                         <ListItemText primary={activity.name} />
-                                        <ButtonTrash />
+                                        <ButtonTrash onClick={() => handleRemoveActivity(eventProp._id, activity) } />
                                     </ListItemButton>
 
                                 </ListItem>
