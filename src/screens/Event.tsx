@@ -15,6 +15,7 @@ import type { activity } from '../types/activity';
 
 import fetchActivities from '../fetchers/activities/fetchActivities';
 import createActivity from '../fetchers/activities/createActivity';
+import deleteActivity from '../fetchers/activities/deleteActivity'
 import addActivity from '../fetchers/events/addActivityToEvent';
 import removeActivity from '../fetchers/events/removeActivityFromEvent';
 import getState from "../utils/getState";
@@ -47,12 +48,12 @@ export default function Event() {
         if (params.id) {
             fetchEvent(params.id)
             fetchActivities(params.id)
-            .then((activities) => {
-                console.log(activities)
-                setEventActivities(activities);
-            })
-            
-            
+                .then((activities) => {
+                    console.log(activities)
+                    setEventActivities(activities);
+                })
+
+
         }
     }, [params])
 
@@ -80,7 +81,7 @@ export default function Event() {
         }
     }
 
-    
+
 
     const BoxStyled = styled(Box)`
         display: flex;
@@ -149,7 +150,7 @@ export default function Event() {
     }
 
     const handleLockEvent = async () => {
-        const data = { 
+        const data = {
             id: event?._id,
             date_end: event?.date_end,
         }
@@ -170,22 +171,22 @@ export default function Event() {
             const result = await response.json();
             console.log(result);
 
-        } catch(err) {
+        } catch (err) {
             console.error("Error while locking event", err);
         }
     }
 
     const lockEvent = () => {
         handleLockEvent()
-        .then(() => {
-            console.log("lock event then relaod event")
-            if (params.id) {
-                fetchEvent(params.id);
-            }
-        })
+            .then(() => {
+                console.log("lock event then relaod event")
+                if (params.id) {
+                    fetchEvent(params.id);
+                }
+            })
     }
 
-    function handleClickFormActivities () {
+    function handleClickFormActivities() {
         setOpenFormActivities(true)
     }
     function handleCloseFormActivities() {
@@ -196,7 +197,7 @@ export default function Event() {
         handleCloseFormActivities()
     }
 
-    function handleClickFormAddActivity () {
+    function handleClickFormAddActivity() {
         fetchActivities()
             .then((activities) => {
                 console.log(activities)
@@ -214,17 +215,17 @@ export default function Event() {
         console.log("valid form add activity")
         console.log(activity)
         createActivity(eventId, activity)
-        .then((act) => {
-            console.log(act)
-            addActivity(eventId, act)
-            fetchActivities(params.id)
-            .then((activities) => {
-                console.log(activities)
-                setEventActivities(activities);
+            .then((act) => {
+                console.log(act)
+                addActivity(eventId, act)
+                fetchActivities(params.id)
+                    .then((activities) => {
+                        console.log(activities)
+                        setEventActivities(activities);
+                    })
+                    .then(() => { handleCloseFormAddActivity() })
+
             })
-            .then(() => {handleCloseFormAddActivity()})
-            
-        })
     }
 
     function handleClickFormEditActivity(activity: activity) {
@@ -239,23 +240,61 @@ export default function Event() {
     }
 
     function handleValidFormEditActivity(activity: activity) {
-            console.log("valid form edit activity")
-            console.log(activity)
-            handleCloseFormEditActivity()
-        
+        console.log("valid form edit activity")
+        console.log(activity)
+        handleCloseFormEditActivity()
+
     }
 
     function handleClickRemoveActivity(eventId: number, activity: activity) {
         removeActivity(eventId, activity)
+        deleteActivity(activity._id)
+        .then(() => {
+            fetchActivities(params.id)
+                .then((activities) => {
+                    console.log(activities)
+                    setEventActivities(activities);
+                })
+        })
     }
-    
+
 
     return (
         <>
-            {event ? <DialogUpdateEvent eventProp={event} open={openDUE} handleClose={handleCloseDUE} handleValid={handleValidDUE} /> : null}
-            {event ? <FormActivities eventProp={event} open={openFormActivities} activities={eventActivities} handleClose={handleCloseFormActivities} handleValid={handleValidFormActivities} handleAddActivity={handleClickFormAddActivity} handleRemoveActivity={handleClickRemoveActivity} handleEditActivity={handleClickFormEditActivity} /> : null}
-            {event ? <FormAddActivity eventProp={event} open={openFormAddActivity} handleClose={handleCloseFormAddActivity} handleValid={handleValidFormAddActivity} activities={allActivities}/> : null}
-            {activityToEdit && event ? <FormEditActivity eventProp={event} open={openFormEditActivity} handleClose={handleCloseFormEditActivity} handleValid={handleValidFormEditActivity} activityToEdit={activityToEdit}/> : null}
+            {event ? <DialogUpdateEvent
+                eventProp={event}
+                open={openDUE}
+                handleClose={handleCloseDUE}
+                handleValid={handleValidDUE}
+            /> : null}
+
+            {event ? <FormActivities
+                eventProp={event}
+                open={openFormActivities}
+                activities={eventActivities}
+                handleClose={handleCloseFormActivities}
+                handleValid={handleValidFormActivities}
+                handleAddActivity={handleClickFormAddActivity}
+                handleRemoveActivity={handleClickRemoveActivity}
+                handleEditActivity={handleClickFormEditActivity}
+            /> : null}
+
+            {event ? <FormAddActivity
+                eventProp={event}
+                open={openFormAddActivity}
+                handleClose={handleCloseFormAddActivity}
+                handleValid={handleValidFormAddActivity}
+                activities={allActivities}
+            /> : null}
+
+            {activityToEdit && event ? <FormEditActivity
+                eventProp={event}
+                open={openFormEditActivity}
+                handleClose={handleCloseFormEditActivity}
+                handleValid={handleValidFormEditActivity}
+                activityToEdit={activityToEdit}
+            /> : null}
+
             <BackgroundStyled>
                 <BoxStyled>
                     <Grid container columns={24} direction="row" justifyContent="space-between" >
@@ -304,7 +343,7 @@ export default function Event() {
                                     Equipes
                                     {editMode ? <ButtonEditStyled onClick={handleClickOpenDUE} scale={0.7} /> : <div />}
                                 </h3>
-                                
+
                             </BoxCentralsStyled>
 
                         </Grid>

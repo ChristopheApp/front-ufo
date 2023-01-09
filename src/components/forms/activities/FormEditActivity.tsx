@@ -25,6 +25,7 @@ export default function FormEditActivity({ eventProp, open, handleClose, handleV
 
     const [activity, setActivity] = useState<activity>(activityToEdit);
 
+
     useEffect(() => {
         setActivity(activityToEdit)
 
@@ -36,7 +37,11 @@ export default function FormEditActivity({ eventProp, open, handleClose, handleV
 
     return (
         <>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog
+                // maxWidth={theme.breakpoints}
+                open={open} 
+                onClose={handleClose}
+            >
                 <DialogTitle>Modifier une activité</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
