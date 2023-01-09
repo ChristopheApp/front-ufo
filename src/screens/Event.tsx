@@ -67,9 +67,9 @@ export default function Event() {
 
             const result = await response.json();
             console.log(result);
-            setEvent(result[0])
-            console.log(result[0].locked)
-            if (!result[0].locked) {
+            setEvent(result)
+            console.log(result.locked)
+            if (!result.locked) {
                 setEditMode(true);
             } else {
                 setEditMode(false);
