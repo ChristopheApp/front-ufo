@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import FormEditActivity from '../components/forms/activities/FormEditActivity';
 import FormAddActivity from '../components/forms/activities/FormAddActivity';
 import FormActivities from '../components/forms/activities/FormActivities';
-import UDialogUpdateEvent from '../components/dialog/UDialogUpdateEvent';
+import UDialogUpdateEvent from '../components/dialog/events/UDialogUpdateEvent';
 import BoxCentralsStyled from "../components/styled/BoxCentralsStyled";
 import BackgroundStyled from '../components/styled/BackgroundStyled';
 import ButtonEditStyled from '../components/styled/ButtonEditStyled';

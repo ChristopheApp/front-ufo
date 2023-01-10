@@ -2,15 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { event } from '../types/event';
 
 import BackgroundStyled from '../components/styled/BackgroundStyled';
-import UDialogNewEvent from '../components/dialog/UDialogNewEvent';
-import PaperEvent from '../components/PaperEvent';
+import UDialogNewEvent from '../components/dialog/events/UDialogNewEvent';
 import SnackAlert from '../components/SnackAlert';
 import Buttons from '../components/buttons/Buttons';
 import BoxEvents from '../components/BoxEvents';
 import BoxEventCentral from '../components/BoxEventCentral';
 
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 interface Props {

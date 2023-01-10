@@ -7,3 +7,10 @@ export type activity = {
     planning?: string
     id_event?: number
 }
+
+export type newActivity = {
+    name: string,
+    nb_fields: number,
+    nb_teams: number,
+    points: number,
+}

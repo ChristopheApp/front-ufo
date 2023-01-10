@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { event } from '../../types/event';
+import { event } from '../../../types/event';
 
 import UDialogEvent from "./UDialogEvent";
-
-
 
 interface Props {
     children?: React.ReactNode;

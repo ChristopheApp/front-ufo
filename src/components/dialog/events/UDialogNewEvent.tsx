@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import { event } from '../../types/event';
-
+import { newEvent } from '../../../types/event';
 import UDialogEvent from "./UDialogEvent";
-
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-
 
 interface Props {
     children?: React.ReactNode;
@@ -18,7 +13,7 @@ interface Props {
 
 export default function UDialogNewEvent({ open, handleClose, handleValid } : Props) {
 
-    const event = {
+    const event: newEvent = {
         name: '',
         location: '',
         description: '',

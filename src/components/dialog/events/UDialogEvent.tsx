@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { event } from '../../types/event';
+import { event, newEvent } from '../../../types/event';
 
-import UDialog from "./UDialog";
+import UDialog from "../UDialog";
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
+type colorButton = "success" | "warning"
 
 interface Props {
     children?: React.ReactNode;
@@ -17,22 +18,14 @@ interface Props {
     handleValid: (event: any) => void;
     eventProps: newEvent | event;
 }
-type newEvent = {
-    name: string,
-    location: string,
-    description: string,
-    date_start: string,
-    date_end: string,
-    locked: boolean
-}
 
 export default function UDialogEvent({ open, title, description, textButtonValid, eventProps, handleClose, handleValid } : Props) {
 
      // State to store the new event
-     const [event, setEvent] = useState(eventProps);
+     const [event, setEvent] = useState<newEvent | event>(eventProps);
 
     // Function to handle the change of the inputs
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setEvent(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
@@ -40,13 +33,7 @@ export default function UDialogEvent({ open, title, description, textButtonValid
      * Function to handle the click on the button valid
      * @returns {void}
      */
-    const validForm = () => {
-        console.log(event.name)
-        console.log(event.location)
-        console.log(event.date_start)
-        console.log(typeof (event.date_start), new Date(event.date_start))
-        console.log(new Date(event.date_end))
-        console.log(JSON.stringify(new Date(Date.now())))
+    const validForm = (): void => {
         const date1 = new Date(event.date_start)
         const date2 = new Date(event.date_end)
         if (date1 > date2) {
@@ -54,20 +41,18 @@ export default function UDialogEvent({ open, title, description, textButtonValid
         } else {
             console.log("La date de début est inférieure à la date de fin")
             handleValid(event)
-            console.log(event)
-
         }
 
     }
 
-    const disabledButtonValid = () => {
+    const disabledButtonValid = (): boolean => {
         if (event.name !== '' && event.location !== '' && event.date_start !== '' && event.date_end !== '')
             return false
         else
             return true
     }
-
-    const colorButtonValid = () => {
+    
+    const colorButtonValid = (): colorButton => {
         if (event.date_end >= event.date_start)
             return "success"
         else

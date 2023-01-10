@@ -5,8 +5,17 @@ export type event = {
     description: string
     date_start: Date | string
     date_end: Date | string
-    _date_insert?: Date
+    _date_insert: Date
     teams?: any[]
     activities?: any[]
     locked: boolean
   }
+
+  export type newEvent = {
+    name: string,
+    location: string,
+    description: string,
+    date_start: string,
+    date_end: string,
+    locked: boolean
+}
