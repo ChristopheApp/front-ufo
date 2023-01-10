@@ -1,6 +1,6 @@
-import type {activity} from "../../types/activity"
+// import type {activity} from "../../types/activity"
 
-const addActivity = async (eventId: number, activity: activity) => {
+const addActivity = async (eventId: number, activity: UfoActivity) => {
 
     console.log("add Activity", eventId, activity)
     console.log(activity)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { event } from '../../types/event';
+// import { event } from '../../types/event';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';

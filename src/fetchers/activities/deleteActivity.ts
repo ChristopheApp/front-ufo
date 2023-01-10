@@ -1,8 +1,8 @@
-import type {activity} from '../../types/activity'
+// import type {activity} from '../../types/activity'
 
-const deleteActivity = async (activityId: number ) :Promise<activity> => {
+const deleteActivity = async (activityId: number ) :Promise<UfoActivity> => {
     
-    let activityCreated = {} as activity;
+    let activityCreated = {} as UfoActivity;
 
     console.log("delete activity", activityId)
 

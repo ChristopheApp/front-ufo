@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import UDialog from '../UDialog'
 
-import { activity, newActivity } from '../../../types/activity';
+// import { activity, newActivity } from '../../../types/activity';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ interface Props {
     description: string;
     handleClose: () => void;
     handleValid: () => void;
-    activityProps: activity | newActivity;
+    activityProps: UfoActivity | UfoNewActivity;
 }
 
 export default function UDialogActivity({ open, title, description, handleClose, handleValid, activityProps} : Props) {
@@ -89,7 +89,7 @@ export default function UDialogActivity({ open, title, description, handleClose,
                         type="number"
                         fullWidth={true}
                         variant="standard"
-                        value={activity.points}
+                        value={activity.nb_teams}
                         name="points"
                         onChange={handleChange}
                     />

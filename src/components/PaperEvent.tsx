@@ -5,11 +5,11 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import styled from '@emotion/styled'
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
-import { event } from '../types/event';
+// import { event } from '../types/event';
 
 interface Props {
     children?: React.ReactNode;
-    event: event;
+    event: UfoEvent;
     deleteEvent: (id: number, name: string) => void;
     isAdmin: boolean;
 }

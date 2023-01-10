@@ -1,16 +1,14 @@
-export type activity = {
+type UfoActivity = {
     _id: number
     name: string
     nb_fields: number
     nb_teams: number
-    points: number
-    planning?: string
-    id_event?: number
+    category: string
 }
 
-export type newActivity = {
+type UfoNewActivity = {
     name: string,
     nb_fields: number,
     nb_teams: number,
-    points: number,
+    category: string
 }

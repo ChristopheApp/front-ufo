@@ -1,6 +1,6 @@
-import type { event } from '../types/event'
+// import type { UfoEvent } from '../types/event'
 
-const getState = (event: event) => {
+const getState = (event: UfoEvent) => {
     let state = "";
     if (!event.locked) {
         state = "En création"

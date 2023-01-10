@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { event } from '../types/event';
+// import { event } from '../types/event';
 
 import BackgroundStyled from '../components/styled/BackgroundStyled';
 import UDialogNewEvent from '../components/dialog/events/UDialogNewEvent';
@@ -17,13 +17,13 @@ interface Props {
 
 function Homepage({ isAdmin }: Props) {
 
-    const eventSelected = useRef<event | null>(null);
+    const eventSelected = useRef<UfoEvent | null>(null);
 
     // State to store the events fetched from the API
-    const [events, setEvents] = useState<event[]>([]);
-    const [eventsCreated, setEventsCreated] = useState<event[]>([]);
-    const [eventsInProgress, setEventsInProgress] = useState<event[]>([]);
-    const [eventCentral, setEventCentral] = useState<event | null>(null);
+    const [events, setEvents] = useState<UfoEvent[]>([]);
+    const [eventsCreated, setEventsCreated] = useState<UfoEvent[]>([]);
+    const [eventsInProgress, setEventsInProgress] = useState<UfoEvent[]>([]);
+    const [eventCentral, setEventCentral] = useState<UfoEvent | null>(null);
 
     // State to open or close the dialog to create new event
     const [openDNE, setOpenDNE] = useState(false);
@@ -60,7 +60,7 @@ function Homepage({ isAdmin }: Props) {
             console.log(result);
             setEvents(result)
 
-            result.forEach((event: event) => {
+            result.forEach((event: UfoEvent) => {
                 if(!event.locked){
                     setEventsInProgress((eventsInProgress) => [...eventsInProgress, event].sort((a, b) => new Date(a.date_start).getTime() - new Date(b.date_start).getTime()));
                 } else {
@@ -74,10 +74,10 @@ function Homepage({ isAdmin }: Props) {
     }
 
     /** Function to create a new event in the database
-     * @param {event} event
+     * @param {UfoEvent} event
      * @returns {void}
      */
-    const createEvent = async (event: event) => {
+    const createEvent = async (event: UfoEvent) => {
         // Format the date to be compatible with the database
         const data = {
             name: event.name,
@@ -159,7 +159,7 @@ function Homepage({ isAdmin }: Props) {
      * 
     */
 
-    const handleClickEvent = (event: event) => {
+    const handleClickEvent = (event: UfoEvent) => {
         console.log('click event')
         console.log(event)
         setEventCentral(event);
@@ -186,7 +186,7 @@ function Homepage({ isAdmin }: Props) {
      * and close the dialog 
      * @param {event} event - The event's data to create
      */
-    const handleValidDNE = (event: event) => {
+    const handleValidDNE = (event: UfoEvent) => {
         createEvent(event);
         setOpenDNE(false);
     };

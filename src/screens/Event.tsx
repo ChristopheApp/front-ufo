@@ -10,9 +10,6 @@ import ButtonEditStyled from '../components/styled/ButtonEditStyled';
 import Buttons from '../components/buttons/Buttons';
 import Loading from '../components/Loading';
 
-import type { event } from '../types/event';
-import type { activity } from '../types/activity';
-
 import fetchActivities from '../fetchers/activities/fetchActivities';
 import createActivity from '../fetchers/activities/createActivity';
 import deleteActivity from '../fetchers/activities/deleteActivity'
@@ -29,11 +26,11 @@ import styled from "@emotion/styled";
 export default function Event() {
     let params = useParams();
 
-    const [event, setEvent] = useState<event>();
+    const [event, setEvent] = useState<UfoEvent>();
     const [editMode, setEditMode] = useState<boolean>(false);
-    const [eventActivities, setEventActivities] = useState<activity[]>([]);
-    const [allActivities, setAllActivities] = useState<activity[]>([]);
-    const [activityToEdit, setActivityToEdit] = useState<activity>();
+    const [eventActivities, setEventActivities] = useState<UfoActivity[]>([]);
+    const [allActivities, setAllActivities] = useState<UfoActivity[]>([]);
+    const [activityToEdit, setActivityToEdit] = useState<UfoActivity>();
 
     // State to open or close the dialog to update event
     const [openDUE, setOpenDUE] = useState(false);
@@ -110,14 +107,14 @@ export default function Event() {
      * and close the dialog 
      * @param {event} event - The event's data to update
      */
-    const handleValidDUE = (event: event) => {
+    const handleValidDUE = (event: UfoEvent) => {
         console.log(event);
         setOpenDUE(false);
         updateEvent(event);
         setEvent(event);
     };
 
-    const updateEvent = async (event: event) => {
+    const updateEvent = async (event: UfoEvent) => {
         console.log(event._id)
         const data = {
             id: event._id,
@@ -211,7 +208,7 @@ export default function Event() {
         setOpenFormAddActivity(false)
         setOpenFormActivities(true)
     }
-    function handleValidFormAddActivity(eventId: number, activity: activity) {
+    function handleValidFormAddActivity(eventId: number, activity: UfoActivity) {
         console.log("valid form add activity")
         console.log(activity)
         createActivity(eventId, activity)
@@ -228,7 +225,7 @@ export default function Event() {
             })
     }
 
-    function handleClickFormEditActivity(activity: activity) {
+    function handleClickFormEditActivity(activity: UfoActivity) {
         console.log("edit activity")
         console.log(activity)
         setActivityToEdit(activity)
@@ -239,14 +236,14 @@ export default function Event() {
         setOpenFormEditActivity(false)
     }
 
-    function handleValidFormEditActivity(activity: activity) {
+    function handleValidFormEditActivity(activity: UfoActivity) {
         console.log("valid form edit activity")
         console.log(activity)
         handleCloseFormEditActivity()
 
     }
 
-    function handleClickRemoveActivity(eventId: number, activity: activity) {
+    function handleClickRemoveActivity(eventId: number, activity: UfoActivity) {
         removeActivity(eventId, activity)
         deleteActivity(activity._id)
         .then(() => {

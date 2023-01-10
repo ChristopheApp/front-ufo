@@ -5,16 +5,16 @@ import BoxEvent from './BoxEvent'
 
 import styled from "@emotion/styled";
 
-import type { event } from "../types/event";
+// import type { event } from "../types/event";
 
 import PaperEvent from './PaperEvent'
 
 interface Props {
     children?: ReactElement
     title: string
-    events: event[]
+    events: UfoEvent[]
     isAdmin: boolean
-    handleDeleteEvent: (event: event) => void;
+    handleDeleteEvent: (event: UfoEvent) => void;
 
 }
 

@@ -1,11 +1,11 @@
 import {ReactElement} from "react"
 import BoxCentralsStyled from "./styled/BoxCentralsStyled";
 
-import type { event } from "../types/event";
+// import type { event } from "../types/event";
 
 interface Props {
     children?: ReactElement
-    event: event
+    event: UfoEvent
     isAdmin: boolean
 }
 export default function BoxCentralDesc({ children, event,  isAdmin}: Props) {

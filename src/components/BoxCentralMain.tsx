@@ -6,7 +6,7 @@ import getState from "../utils/getState";
 
 import styled from "@emotion/styled";
 
-import type { event } from "../types/event";
+// import type { event } from "../types/event";
 
 import ButtonMore from './buttons/ButtonMore'
 import ButtonEdit from './buttons/ButtonEdit'
@@ -14,7 +14,7 @@ import BoxCentralsStyled from "./styled/BoxCentralsStyled";
 
 interface Props {
     children?: ReactElement
-    event: event
+    event: UfoEvent
     isAdmin: boolean
 }
 export default function BoxCentralMain({ children, event,  isAdmin}: Props) {

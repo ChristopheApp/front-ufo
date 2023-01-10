@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { event, newEvent } from '../../../types/event';
+// import { event, newEvent } from '../../../types/event';
 
 import UDialog from "../UDialog";
 
@@ -16,13 +16,13 @@ interface Props {
     textButtonValid: string;
     handleClose: () => void;
     handleValid: (event: any) => void;
-    eventProps: newEvent | event;
+    eventProps: UfoNewEvent | UfoEvent;
 }
 
 export default function UDialogEvent({ open, title, description, textButtonValid, eventProps, handleClose, handleValid } : Props) {
 
      // State to store the new event
-     const [event, setEvent] = useState<newEvent | event>(eventProps);
+     const [event, setEvent] = useState<UfoNewEvent | UfoEvent>(eventProps);
 
     // Function to handle the change of the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

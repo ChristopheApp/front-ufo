@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { newEvent } from '../../../types/event';
+// import { newEvent } from '../../../types/event';
 import UDialogEvent from "./UDialogEvent";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 export default function UDialogNewEvent({ open, handleClose, handleValid } : Props) {
 
-    const event: newEvent = {
+    const event: UfoNewEvent = {
         name: '',
         location: '',
         description: '',

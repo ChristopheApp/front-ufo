@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { event } from '../../../types/event';
+// import { event } from '../../../types/event';
 
 import UDialogEvent from "./UDialogEvent";
 
@@ -8,7 +8,7 @@ interface Props {
     open: boolean;
     handleClose: () => void;
     handleValid: (event: any) => void;
-    eventProp: event;
+    eventProp: UfoEvent;
 }
 
 export default function UDialogUpdateEvent({ eventProp, open, handleClose, handleValid } : Props) {

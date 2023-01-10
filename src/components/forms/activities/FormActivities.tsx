@@ -15,8 +15,8 @@ import ButtonEdit from '../../buttons/ButtonEdit';
 import ButtonTrash from '../../buttons/ButtonTrash';
 
 
-import type { event } from "../../../types/event";
-import { activity } from '../../../types/activity';
+// import type { event } from "../../../types/event";
+// import { activity } from '../../../types/activity';
 
 interface Props {
     children?: React.ReactNode;
@@ -25,9 +25,9 @@ interface Props {
     handleValid: () => void;
     handleAddActivity: () => void;
     handleRemoveActivity : (eventId: number, activity: any) => void;
-    handleEditActivity: (activity: activity) => void;
-    eventProp: event;
-    activities: activity[]
+    handleEditActivity: (activity: UfoActivity) => void;
+    eventProp: UfoEvent;
+    activities: UfoActivity[]
 }
 
 export default function FormActivities({ eventProp, open, handleClose, handleValid, handleAddActivity, handleRemoveActivity, handleEditActivity, activities }: Props) {

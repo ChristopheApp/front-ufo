@@ -1,4 +1,4 @@
-export type event = {
+interface UfoEvent {
     _id: number
     name: string
     location: string
@@ -11,7 +11,7 @@ export type event = {
     locked: boolean
   }
 
-  export type newEvent = {
+  interface UfoNewEvent {
     name: string,
     location: string,
     description: string,

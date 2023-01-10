@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 
 import styled from "@emotion/styled";
 
-import type { event } from "../types/event";
+// import type { event } from "../types/event";
 import BoxCentralMain from "./BoxCentralMain";
 import BoxCentralAct from "./BoxCentralAct";
 import BoxCentralDesc from "./BoxCentralDesc";
@@ -12,7 +12,7 @@ import BoxCentralDesc from "./BoxCentralDesc";
 
 interface Props {
     children?: ReactElement
-    event: event
+    event: UfoEvent
     isAdmin: boolean
 }
 

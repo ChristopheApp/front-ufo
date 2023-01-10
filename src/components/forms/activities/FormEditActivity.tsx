@@ -9,21 +9,21 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
 import TextField from '@mui/material/TextField';
 
-import type { event } from "../../../types/event";
-import type { activity } from '../../../types/activity';
+// import type { event } from "../../../types/event";
+// import type { activity } from '../../../types/activity';
 
 interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
-    handleValid: (activity: activity) => void;
-    eventProp: event;
-    activityToEdit: activity
+    handleValid: (activity: UfoActivity) => void;
+    eventProp: UfoEvent;
+    activityToEdit: UfoActivity
 }
 
 export default function FormEditActivity({ eventProp, open, handleClose, handleValid, activityToEdit }: Props) {
 
-    const [activity, setActivity] = useState<activity>(activityToEdit);
+    const [activity, setActivity] = useState<UfoActivity>(activityToEdit);
 
 
     useEffect(() => {
@@ -100,7 +100,7 @@ export default function FormEditActivity({ eventProp, open, handleClose, handleV
                         type="number"
                         fullWidth={true}
                         variant="standard"
-                        value={activity.points}
+                        value={activity.nb_teams}
                         name="points"
                         onChange={handleChange}
                     />

@@ -11,33 +11,32 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 
-import type { event } from "../../../types/event";
-import type { activity } from '../../../types/activity';
+// import type { event } from "../../../types/event";
+// import type { activity } from '../../../types/activity';
 
 interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
     handleValid: (eventId: number, activity: any) => void;
-    eventProp: event;
-    activities: activity[]
+    eventProp: UfoEvent;
+    activities: UfoActivity[]
 }
 
 export default function FormAddActivity({ eventProp, open, handleClose, handleValid, activities }: Props) {
 
     const defaultProps = {
         options: activities,
-        getOptionLabel: (option: activity) => option.name + " - " + option.nb_fields + " terrains - " + option.nb_teams + " équipes - " + option.points + " points",
+        getOptionLabel: (option: UfoActivity) => option.name + " - " + option.nb_fields + " terrains - " + option.nb_teams + " équipes - ",
     };
 
-    const [value, setValue] = useState<activity | null>(null);
+    const [value, setValue] = useState<UfoActivity | null>(null);
     const [inputValue, setInputValue] = useState('');
-    const [event, setEvent] = useState<event>(eventProp);
+    const [event, setEvent] = useState<UfoEvent>(eventProp);
     const [activity, setActivity] = useState({
         name: "",
         nb_fields: 0,
         nb_teams: 0,
-        points: 0,
     });
 
 
@@ -45,14 +44,13 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
         setActivity(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    const autoFillActivity = (activity: activity | null) => {
+    const autoFillActivity = (activity: UfoActivity | null) => {
         if (activity) {
             console.log(activity)
             setActivity({
                 name: activity.name,
                 nb_fields: activity.nb_fields,
                 nb_teams: activity.nb_teams,
-                points: activity.points,
             })
         }
     }
@@ -74,7 +72,7 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
                             setInputValue(newInputValue);
                         }}
                         value={value}
-                        onChange={(event: any, newValue: activity | null) => {
+                        onChange={(event: any, newValue: UfoActivity | null) => {
                             autoFillActivity(newValue);
                             //setValue(newValue);
                         }}
@@ -129,7 +127,7 @@ export default function FormAddActivity({ eventProp, open, handleClose, handleVa
                         type="number"
                         fullWidth={true}
                         variant="standard"
-                        value={activity.points}
+                        value={activity.nb_teams}
                         name="points"
                         onChange={handleChange}
                     />

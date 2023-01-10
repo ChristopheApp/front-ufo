@@ -1,8 +1,8 @@
-import type {activity} from '../../types/activity'
+// import type {activity} from '../../types/activity'
 
-const createActivity = async (eventId: number | undefined, activity: activity) :Promise<activity> => {
+const createActivity = async (eventId: number | undefined, activity: UfoActivity) :Promise<UfoActivity> => {
     
-    let activityCreated = {} as activity;
+    let activityCreated = {} as UfoActivity;
 
     console.log("createActivity", eventId, activity)
 
@@ -10,7 +10,6 @@ const createActivity = async (eventId: number | undefined, activity: activity) :
         name: activity.name,
         nb_fields: activity.nb_fields,
         nb_teams: activity.nb_teams,
-        points: activity.points,
         id_event: eventId
     }
 

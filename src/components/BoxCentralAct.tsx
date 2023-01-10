@@ -1,6 +1,6 @@
 import {useState, useEffect, ReactElement} from "react"
-import type { event } from "../types/event";
-import type { activity } from "../types/activity";
+// import type { event } from "../types/event";
+// import type { activity } from "../types/activity";
 
 import fetchActivities from "../fetchers/activities/fetchActivities";
 
@@ -8,12 +8,12 @@ import BoxCentralsStyled from "./styled/BoxCentralsStyled";
 
 interface Props {
     children?: ReactElement
-    event: event
+    event: UfoEvent
     isAdmin: boolean
 }
 export default function BoxCentralAct({ children, event,  isAdmin}: Props) {
 
-    const [activities, setActivities] = useState<activity[]>([])
+    const [activities, setActivities] = useState<UfoActivity[]>([])
 
     useEffect(() => {
         if(event._id) {

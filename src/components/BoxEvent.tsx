@@ -6,17 +6,15 @@ import { Box } from "@mui/material";
 import formatDate from "../utils/formatDate";
 
 import styled from "@emotion/styled";
-
-import type { event } from "../types/event";
-
+ 
 import ButtonMore from './buttons/ButtonMore'
 import ButtonEdit from './buttons/ButtonEdit'
 
 interface Props {
     children?: ReactElement
-    event: event
+    event: UfoEvent
     isAdmin: boolean
-    handleClickEvent: (event: event) => void;
+    handleClickEvent: (event: UfoEvent) => void;
 
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { event } from '../../types/event';
+// import { event } from '../../types/event';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,14 +16,14 @@ interface Props {
     children?: React.ReactNode;
     open: boolean;
     handleClose: () => void;
-    handleValid: (event: event) => void;
-    eventProp: event;
+    handleValid: (event: UfoEvent) => void;
+    eventProp: UfoEvent;
 }
 
 export default function DialogNewEvent({ eventProp, open, handleClose, handleValid }: Props) {
 
     // State to store the new event
-    const [event, setEvent] = useState<event>(eventProp);
+    const [event, setEvent] = useState<UfoEvent>(eventProp);
 
     // Function to handle the change of the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
