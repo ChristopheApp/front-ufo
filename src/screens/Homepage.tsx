@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { event } from '../types/event';
 
 import BackgroundStyled from '../components/styled/BackgroundStyled';
-import DialogNewEvent from '../components/dialog/DialogNewEvent';
+import UDialogNewEvent from '../components/dialog/UDialogNewEvent';
 import PaperEvent from '../components/PaperEvent';
 import SnackAlert from '../components/SnackAlert';
 import Buttons from '../components/buttons/Buttons';
@@ -210,7 +210,7 @@ function Homepage({ isAdmin }: Props) {
         <>
             <SnackAlert open={openSnack} handleClose={handleCloseSnack} type={alertType} errorMessage={errorSnackMsg} />
 
-            <DialogNewEvent open={openDNE} handleClose={handleCloseDNE} handleValid={handleValidDNE} />
+            <UDialogNewEvent open={openDNE} handleClose={handleCloseDNE} handleValid={handleValidDNE} />
 
             <BackgroundStyled>
                 

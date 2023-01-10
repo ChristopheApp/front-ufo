@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import FormEditActivity from '../components/forms/activities/FormEditActivity';
 import FormAddActivity from '../components/forms/activities/FormAddActivity';
 import FormActivities from '../components/forms/activities/FormActivities';
-import DialogUpdateEvent from '../components/dialog/DialogUpdateEvent';
+import UDialogUpdateEvent from '../components/dialog/UDialogUpdateEvent';
 import BoxCentralsStyled from "../components/styled/BoxCentralsStyled";
 import BackgroundStyled from '../components/styled/BackgroundStyled';
 import ButtonEditStyled from '../components/styled/ButtonEditStyled';
@@ -261,7 +261,7 @@ export default function Event() {
 
     return (
         <>
-            {event ? <DialogUpdateEvent
+            {event ? <UDialogUpdateEvent
                 eventProp={event}
                 open={openDUE}
                 handleClose={handleCloseDUE}
