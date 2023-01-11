@@ -4,6 +4,7 @@ import FormEditActivity from '../components/forms/activities/FormEditActivity';
 import FormAddActivity from '../components/forms/activities/FormAddActivity';
 import FormActivities from '../components/forms/activities/FormActivities';
 import UDialogUpdateEvent from '../components/dialog/events/UDialogUpdateEvent';
+import UDialogActivity from '../components/dialog/activities/UDialogActivity';
 import BoxCentralsStyled from "../components/styled/BoxCentralsStyled";
 import BackgroundStyled from '../components/styled/BackgroundStyled';
 import ButtonEditStyled from '../components/styled/ButtonEditStyled';
@@ -265,6 +266,8 @@ export default function Event() {
                 handleValid={handleValidDUE}
             /> : null}
 
+            
+
             {event ? <FormActivities
                 eventProp={event}
                 open={openFormActivities}
@@ -276,21 +279,31 @@ export default function Event() {
                 handleEditActivity={handleClickFormEditActivity}
             /> : null}
 
-            {event ? <FormAddActivity
+            {activityToEdit ? <UDialogActivity 
+                open={openFormAddActivity}
+                title="Dialog Activities"
+                description='Description of the dialog'
+                handleClose={handleCloseFormAddActivity}
+                handleValid={handleValidFormActivities}
+                activityProps={activityToEdit}
+            />
+            : null}
+
+            {/* {event ? <FormAddActivity
                 eventProp={event}
                 open={openFormAddActivity}
                 handleClose={handleCloseFormAddActivity}
                 handleValid={handleValidFormAddActivity}
                 activities={allActivities}
-            /> : null}
+            /> : null} */}
 
-            {activityToEdit && event ? <FormEditActivity
+            {/* {activityToEdit && event ? <FormEditActivity
                 eventProp={event}
                 open={openFormEditActivity}
                 handleClose={handleCloseFormEditActivity}
                 handleValid={handleValidFormEditActivity}
                 activityToEdit={activityToEdit}
-            /> : null}
+            /> : null} */}
 
             <BackgroundStyled>
                 <BoxStyled>
