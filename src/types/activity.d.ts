@@ -1,4 +1,4 @@
-type UfoActivity = {
+interface UfoActivity {
     _id: number
     name: string
     nb_fields: number
@@ -6,7 +6,7 @@ type UfoActivity = {
     category: string
 }
 
-type UfoNewActivity = {
+interface UfoNewActivity {
     name: string,
     nb_fields: number,
     nb_teams: number,
